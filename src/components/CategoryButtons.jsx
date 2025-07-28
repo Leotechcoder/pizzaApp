@@ -3,8 +3,6 @@ import React from 'react';
 const categories = ['Pizza', 'Burger', 'Pasta', 'Drink'];
 
 export function CategoryButtons({ selectedCategory, onSelectCategory }) {
-  // const categories = ['Pizza', 'Burger', 'Pasta', 'Drink']; // This line is now redundant
-
   return (
     <div className="flex space-x-4 overflow-x-auto py-4 scrollbar-hide">
       {categories.map((category) => (
@@ -23,14 +21,4 @@ export function CategoryButtons({ selectedCategory, onSelectCategory }) {
     </div>
   );
 }
-
-// function getCategoryEmoji(category) { // This function is now redundant
-//   switch (category) {
-//     case 'Pizza': return '🍕';
-//     case 'Burger': return '🍔';
-//     case 'Pasta': return '🍝';
-//     case 'Drink': return '🥤';
-//     default: return '🍽️';
-//   }
-// }
 

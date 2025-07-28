@@ -13,7 +13,7 @@ const AvatarImage = React.forwardRef(({ className, src, alt = '', ...props }, re
     ref={ref}
     src={src}
     alt={alt}
-    className={`h-full w-full object-cover ${className}`}
+    className={`h-9 w-9 object-contain  ${className}`}
     {...props}
   />
 ));
@@ -33,5 +33,4 @@ AvatarImage.displayName = 'AvatarImage';
 AvatarFallback.displayName = 'AvatarFallback';
 
 export { Avatar, AvatarImage, AvatarFallback };
-
 

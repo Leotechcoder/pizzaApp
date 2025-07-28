@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
-import { Plus, Clock, Flame } from 'lucide-react';
-import { ProductModal } from './ProductModal';
+import { Plus, Clock, Flame, Heart } from 'lucide-react';
+import  ProductModal  from './ProductModal';
 
-export function MenuItem({ id, name, price, image, description, category, ingredients, calories, preparationTime, volume, onAdd }) {
+export function MenuItem({ 
+  id, 
+  name, 
+  price, 
+  image, 
+  description, 
+  category, 
+  ingredients, 
+  calories, 
+  preparationTime, 
+  volume, 
+  onAdd, 
+  isFavorite, 
+  onToggleFavorite,
+  showBestSellerBadge = false,
+  originalPrice // Add support for original price
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddToCart = (product) => {
@@ -13,19 +29,38 @@ export function MenuItem({ id, name, price, image, description, category, ingred
   return (
     <>
       <div 
-        className="flex items-start justify-between p-4 bg-white rounded-xl shadow-sm cursor-pointer"
+        className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="flex items-start gap-4">
+        <div className="relative">
           <img
             src={image}
             alt={name}
-            className="w-24 h-24 object-cover rounded-lg"
+            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div>
-            <h3 className="font-semibold text-lg">{name}</h3>
-            <p className="text-gray-600 text-sm mb-2">{description}</p>
-            <div className="flex items-center gap-4 text-sm text-gray-500">
+          {showBestSellerBadge && (
+            <div className="absolute top-2 left-2 bg-red-700 text-white text-sm px-2 py-1 rounded">
+              Más Vendido
+            </div>
+          )}
+        </div>
+        <div className="p-4 flex flex-col flex-grow">
+          <div className='flex justify-between items-center'>
+
+          <h3 className="font-semibold text-lg mb-1">{name}</h3>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite(id);
+            }}
+            className={`p-2 rounded-full ${isFavorite ? 'text-red-600' : 'text-gray-400'}`}
+          >
+            <Heart className="h-5 w-5" fill={isFavorite ? 'currentColor' : 'none'} />
+          </button>
+          </div>
+          <p className="text-gray-600 text-sm mb-2 flex-grow line-clamp-2">{description}</p>
+          {/* <div className="flex items-center justify-between mt-2">
+            <div className="flex items-center gap-2 text-sm text-gray-500">
               {preparationTime && (
                 <div className="flex items-center">
                   <Clock className="w-4 h-4 mr-1" />
@@ -42,19 +77,24 @@ export function MenuItem({ id, name, price, image, description, category, ingred
                 <div>{volume}</div>
               )}
             </div>
+          </div> */}
+          <div className="flex items-center justify-between mt-3">
+            <div className="flex items-center gap-2">
+              <span className="text-green-500 font-semibold text-lg">${price.toFixed(2)}</span>
+              {originalPrice && (
+                <span className="text-gray-400 line-through text-sm">${originalPrice.toFixed(2)}</span>
+              )}
+            </div>
+            {/* <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(true);
+              }}
+              className="bg-pink-600 text-white p-2 rounded-full hover:bg-pink-700 transition-colors"
+            >
+              <Plus className="w-5 h-5" />
+            </button> */}
           </div>
-        </div>
-        <div className="flex flex-col items-end">
-          <p className="text-green-500 font-semibold mb-2">${price}</p>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsModalOpen(true);
-            }}
-            className="w-8 h-8 flex items-center justify-center bg-orange-500 text-white rounded-full"
-          >
-            <Plus className="w-4 h-4" />
-          </button>
         </div>
       </div>
       <ProductModal

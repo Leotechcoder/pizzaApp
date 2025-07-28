@@ -1,36 +1,47 @@
 import React from 'react';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-8 transition-all duration-300 ease-in-out">
+    <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">About Us</h3>
-            <p className="text-sm">
-              Pizza Delivery App is your go-to platform for ordering delicious pizzas and more. We strive to provide the best food delivery experience.
-            </p>
+        <div className="flex flex-wrap justify-between">
+          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+            <h3 className="text-xl font-bold mb-4">Pizza App</h3>
+            <p className="text-gray-400">Delicious pizzas delivered to your doorstep</p>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <p className="text-sm">Email: info@pizzadelivery.com</p>
-            <p className="text-sm">Phone: (123) 456-7890</p>
-            <p className="text-sm">Address: 123 Pizza Street, Foodville, FD 12345</p>
+          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Home</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Menu</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">About Us</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">Contact</a></li>
+            </ul>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+          <div className="w-full md:w-1/4 mb-6 md:mb-0">
+            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <p className="mb-2">123 Pizza Street</p>
+            <p className="mb-2">New York, NY 10001</p>
+            <p className="mb-2">Phone: (123) 456-7890</p>
+            <p>Email: info@pizzaapp.com</p>
+          </div>
+          <div className="w-full md:w-1/4">
+            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-orange-500"><Facebook /></a>
-              <a href="#" className="text-white hover:text-orange-500"><Twitter /></a>
-              <a href="#" className="text-white hover:text-orange-500"><Instagram /></a>
-              <a href="#" className="text-white hover:text-orange-500"><Linkedin /></a>
+              <a href="#" className="text-white hover:text-orange-500 transition-colors">
+                <i className="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" className="text-white hover:text-orange-500 transition-colors">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="text-white hover:text-orange-500 transition-colors">
+                <i className="fab fa-instagram"></i>
+              </a>
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-700 text-sm text-center">
-          <p>&copy; 2023 Pizza Delivery App. All rights reserved.</p>
-          <p className="mt-2">Developed by John Doe</p>
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p>&copy; 2023 Pizza App. All rights reserved.</p>
         </div>
       </div>
     </footer>

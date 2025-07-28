@@ -54,7 +54,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [userAvatarUrl, setUserAvatarUrl] = useState("public/Pizza-steve-logo-2.png");
+  const [userAvatarUrl, setUserAvatarUrl] = useState("/Pizza-steve-logo-2.png");
   const [showFooter, setShowFooter] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);

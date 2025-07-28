@@ -1,6 +1,5 @@
-import React from 'react';
-import { Heart, Search } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "./Avatar";
+
+import { Heart, Search, Menu } from 'lucide-react';
 import { Logo } from './Logo';
 
 export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSearch }) {
@@ -24,10 +23,11 @@ export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSe
           onClick={onOpenFavorites}
         />
         <button onClick={onOpenSidebar} className="focus:outline-none">
-          <Avatar className="w-10 h-10">
+          {/* <Avatar className="w-10 h-10">
             <AvatarImage src={userAvatarUrl} alt="User avatar" />
             <AvatarFallback>JS</AvatarFallback>
-          </Avatar>
+          </Avatar> */}
+          <Menu className="h-6 w-6" />
         </button>
       </div>
     </header>

@@ -124,7 +124,7 @@ export default function App() {
         onOpenSearch={() => setIsSearchModalOpen(true)}
       />
       <main className="flex-grow">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2">
           <PromoBanner />
           <BestSellers items={bestSellers} onAddToCart={addToCart} />
           <div className="sticky-header-wrapper">
@@ -134,10 +134,10 @@ export default function App() {
             />
           </div>
           <div className="mt-6">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 ms-3">
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 my-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 my-5 mx-3">
               {filteredMenuItems.map(item => (
                 <MenuItem
                   key={item.id}

@@ -30,7 +30,8 @@ function ProductDetailModal({ isOpen, onClose, product }) {
         </button>
 
         <h2 className="text-3xl font-bold mb-4 text-center">{product.name}</h2>
-        
+        <p className="text-gray-700 mb-4 text-center">{product.category}</p>
+
         {product.image && (
           <img 
             src={product.image} 

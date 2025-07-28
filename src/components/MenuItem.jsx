@@ -45,55 +45,32 @@ export function MenuItem({
           )}
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <div className='flex justify-between items-center'>
+          {/* Título principal del producto */}
+          <h3 className="font-bold text-xl mb-1 text-gray-900 leading-tight">
+            {name}
+          </h3>
 
-          <h3 className="font-semibold text-lg mb-1">{name}</h3>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleFavorite(id);
-            }}
-            className={`p-2 rounded-full ${isFavorite ? 'text-red-600' : 'text-gray-400'}`}
-          >
-            <Heart className="h-5 w-5" fill={isFavorite ? 'currentColor' : 'none'} />
-          </button>
-          </div>
-          <p className="text-gray-600 text-sm mb-2 flex-grow line-clamp-2">{description}</p>
-          {/* <div className="flex items-center justify-between mt-2">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              {preparationTime && (
-                <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-1" />
-                  {preparationTime}
-                </div>
-              )}
-              {calories && (
-                <div className="flex items-center">
-                  <Flame className="w-4 h-4 mr-1" />
-                  {calories} cal
-                </div>
-              )}
-              {volume && (
-                <div>{volume}</div>
-              )}
-            </div>
-          </div> */}
+          {/* Categoría del producto, debajo del nombre y más sutil */}
+          <p className="text-gray-500 text-sm mb-2">
+            {category === 'Pizza Rellena' ? 'Pizza Rellena' : category}
+            {/* La lógica para pluralizar/singularizar categorías se maneja mejor en el componente padre (MenuPage)
+                o en una función auxiliar si es necesario para los títulos de sección.
+                Aquí, simplemente mostramos la categoría tal cual, que ya es comprensible. */}
+          </p>
+
+          {/* Descripción del producto, con límite de 2 líneas para mantener la uniformidad en las tarjetas */}
+          <p className="text-gray-600 text-sm mb-2 flex-grow line-clamp-2">
+            {description}
+          </p>
+
+          {/* Contenedor para el precio, alineado a la izquierda */}
           <div className="flex items-center justify-between mt-3">
-            <div className="flex items-center gap-2">
-              <span className="text-green-500 font-semibold text-lg">${price}</span>
-              {originalPrice && (
-                <span className="text-gray-400 line-through text-sm">${originalPrice}</span>
-              )}
-            </div>
-            {/* <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsModalOpen(true);
-              }}
-              className="bg-pink-600 text-white p-2 rounded-full hover:bg-pink-700 transition-colors"
-            >
-              <Plus className="w-5 h-5" />
-            </button> */}
+            <span className="text-green-600 font-bold text-xl">
+              {/* Formatea el precio para que sea legible, o muestra 'Consultar' si no hay precio */}
+              {price ? `$${price.toLocaleString('es-AR')}` : 'Consultar'}
+            </span>
+            {/* El botón "Ver Detalles" (o similar) se manejaría en el componente padre de la tarjeta (MenuPage),
+                ya que es el que abre el modal. */}
           </div>
         </div>
       </div>

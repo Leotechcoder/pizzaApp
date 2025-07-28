@@ -18,10 +18,10 @@ export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSe
         <div className="">
           <Search className="w-5 h-5 text-gray-500 cursor-pointer" onClick={onOpenSearch} />
         </div>
-        <Heart 
+        {/* <Heart 
           className="w-5 h-5 text-gray-500 cursor-pointer" 
           onClick={onOpenFavorites}
-        />
+        /> */}
         <button onClick={onOpenSidebar} className="focus:outline-none">
           {/* <Avatar className="w-10 h-10">
             <AvatarImage src={userAvatarUrl} alt="User avatar" />

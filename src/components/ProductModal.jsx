@@ -24,7 +24,7 @@ function ProductDetailModal({ isOpen, onClose, product }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-lg p-6 relative">
+      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-lg p-8 relative">
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
           <X className="w-6 h-6" />
         </button>

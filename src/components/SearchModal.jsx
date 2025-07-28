@@ -49,13 +49,13 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
             >
               Buscar
             </button>
-            <button
+            {/* <button
               type="button"
               onClick={handleClear}
               className="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
               Todos
-            </button>
+            </button> */}
           </div>
         </form>
         {searchResults.length > 0 ? (

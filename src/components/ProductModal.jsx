@@ -39,7 +39,7 @@ function ProductDetailModal({ isOpen, onClose, product }) {
           />
         )}
 
-        <p className="text-gray-700 mb-4 text-center">{product.description}</p>
+        {/* <p className="text-gray-700 mb-4 text-center">{product.description}</p> */}
 
         <div className="mb-4 p-4 bg-gray-50 rounded-lg">
           <h3 className="font-semibold mb-2 text-lg">Ingredientes:</h3>

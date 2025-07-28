@@ -2,51 +2,730 @@ import { useEffect, useState } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
 import { PromoBanner } from "./components/PromoBanner";
-import  PaymentCard from "./components/PaymentCard";
+import PaymentCard from "./components/PaymentCard";
 import { MenuItem } from "./components/MenuItem";
 import { FloatingCartButton } from "./components/FloatingCartButton";
 import { Footer } from "./components/Footer";
-import { BestSellers } from "./components/BestSellers"
-import { StickyHeader } from "./components/StickyHeader"
+import { BestSellers } from "./components/BestSellers";
+import { StickyHeader } from "./components/StickyHeader";
 import FavoritesModal from "./components/FavoritesModal";
 import SearchModal from "./components/SearchModal";
+import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
 
 const allMenuItems = [
-  // Pizza
-  { id: 1, name: "Margarita", price: 12, image: "/pizza-margarita.jpg", description: "Classic tomato and mozzarella", category: "Pizza", ingredients: ["Tomato sauce", "Mozzarella", "Basil"], calories: 850, preparationTime: "15 min" },
-  { id: 2, name: "Pepperoni", price: 14, image: "/pizza-piedra.jpg", description: "Spicy pepperoni with mozzarella", category: "Pizza", ingredients: ["Tomato sauce", "Mozzarella", "Pepperoni"], calories: 1050, preparationTime: "18 min" },
-  { id: 3, name: "Vegetariana", price: 13, image: "/pizzas-piedra.jpg", description: "Assorted vegetables and cheese", category: "Pizza", ingredients: ["Tomato sauce", "Mozzarella", "Bell peppers", "Mushrooms", "Onions"], calories: 800, preparationTime: "20 min" },
-  { id: 4, name: "Hawaiiana", price: 15, image: "/pizza-piedra.jpg", description: "Ham and pineapple", category: "Pizza", ingredients: ["Tomato sauce", "Mozzarella", "Ham", "Pineapple"], calories: 950, preparationTime: "17 min" },
-  { id: 5, name: "BBQ Chicken", price: 16, image: "/pizza-piedra.jpg", description: "BBQ sauce with chicken and onions", category: "Pizza", ingredients: ["BBQ sauce", "Mozzarella", "Chicken", "Red onions"], calories: 1100, preparationTime: "22 min" },
-  { id: 6, name: "Meat Lovers", price: 17, image: "/pizza-piedra.jpg", description: "Assorted meats and cheese", category: "Pizza", ingredients: ["Tomato sauce", "Mozzarella", "Pepperoni", "Sausage", "Bacon", "Ground beef"], calories: 1250, preparationTime: "25 min" },
-  { id: 7, name: "Mushroom Delight", price: 14, image: "/pizza-piedra.jpg", description: "Assorted mushrooms and truffle oil", category: "Pizza", ingredients: ["Cream sauce", "Mozzarella", "Assorted mushrooms", "Truffle oil"], calories: 900, preparationTime: "20 min" },
+  // Empanadas
+  {
+    id: 1,
+    name: "Carne",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=1",
+    description: "Carne (x docena)",
+    category: "Empanada",
+    ingredients: [], // Ingredients not specified for empanadas in the image
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 2,
+    name: "Pollo",
+    price: 6500,
+    image: "https://picsum.photos/600/400?random=2",
+    description: "Pollo (x docena)",
+    category: "Empanada",
+    ingredients: [],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 3,
+    name: "Jamón y Queso",
+    price: null, // Price not legible
+    image: "https://picsum.photos/600/400?random=3",
+    description: "Jamón y Queso",
+    category: "Empanada",
+    ingredients: [],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 4,
+    name: "Humita",
+    price: 1200,
+    image: "https://picsum.photos/600/400?random=4",
+    description: "Humita (x unidad)",
+    category: "Empanada",
+    ingredients: [],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 5,
+    name: "Roquefort",
+    price: null, // Price not legible
+    image: "https://picsum.photos/600/400?random=5",
+    description: "Roquefort",
+    category: "Empanada",
+    ingredients: [],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 6,
+    name: "Cebolla y Queso",
+    price: null, // Price not legible
+    image: "https://picsum.photos/600/400?random=6",
+    description: "Cebolla y Queso",
+    category: "Empanada",
+    ingredients: [],
+    calories: null,
+    preparationTime: null,
+  },
 
-  // Burger
-  { id: 8, name: "Burger Clasica", price: 10, image: "/pizza-piedra.jpg", description: "Beef patty with lettuce and tomato", category: "Burger", ingredients: ["Beef patty", "Lettuce", "Tomato", "Onion", "Pickles"], calories: 650, preparationTime: "10 min" },
-  { id: 9, name: "Burger con queso", price: 11, image: "/pizza-piedra.jpg", description: "Classic burger with cheese", category: "Burger", ingredients: ["Beef patty", "Cheese", "Lettuce", "Tomato", "Onion"], calories: 750, preparationTime: "12 min" },
-  { id: 10, name: "Bacon Burger", price: 12, image: "/pizza-piedra.jpg", description: "Burger with bacon and cheese", category: "Burger", ingredients: ["Beef patty", "Bacon", "Cheese", "Lettuce", "Tomato"], calories: 850, preparationTime: "15 min" },
-  { id: 11, name: "Burger Vegetariana", price: 10, image: "/pizza-piedra.jpg", description: "Plant-based patty with veggies", category: "Burger", ingredients: ["Veggie patty", "Lettuce", "Tomato", "Cucumber", "Vegan mayo"], calories: 450, preparationTime: "12 min" },
-  { id: 12, name: "Mushroom Swiss", price: 12, image: "/pizza-piedra.jpg", description: "Burger with mushrooms and Swiss cheese", category: "Burger", ingredients: ["Beef patty", "Swiss cheese", "Sautéed mushrooms", "Lettuce"], calories: 700, preparationTime: "14 min" },
-  { id: 13, name: "BBQ Burger", price: 13, image: "/pizza-piedra.jpg", description: "Burger with BBQ sauce and onion rings", category: "Burger", ingredients: ["Beef patty", "BBQ sauce", "Onion rings", "Cheddar cheese"], calories: 900, preparationTime: "16 min" },
-  { id: 14, name: "Spicy Jalapeno", price: 12, image: "/pizza-piedra.jpg", description: "Burger with jalapenos and spicy sauce", category: "Burger", ingredients: ["Beef patty", "Jalapenos", "Pepper jack cheese", "Spicy sauce"], calories: 750, preparationTime: "13 min" },
+  // Lomos
+  {
+    id: 7,
+    name: "Lomo Simple",
+    price: 11000,
+    image: "https://picsum.photos/600/400?random=7",
+    description: "Pan, lechuga, tomate, carne",
+    category: "Lomo",
+    ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 8,
+    name: "Lomo Completo",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=8",
+    description: "Pan, lechuga, tomate, carne, huevo, jamón, queso, aderezos",
+    category: "Lomo",
+    ingredients: [
+      "Pan",
+      "Lechuga",
+      "Tomate",
+      "Carne",
+      "Huevo",
+      "Jamón",
+      "Queso",
+      "Aderezos",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
 
-  // Pasta
-  { id: 15, name: "Spaghetti a la Bologniesa", price: 13, image: "/pizza-piedra.jpg", description: "Classic meat sauce pasta", category: "Pasta", ingredients: ["Spaghetti", "Ground beef", "Tomato sauce", "Parmesan"], calories: 650, preparationTime: "20 min" },
-  { id: 16, name: "Fettuccine Alfredo", price: 14, image: "/pizza-piedra.jpg", description: "Creamy Parmesan sauce pasta", category: "Pasta", ingredients: ["Fettuccine", "Heavy cream", "Parmesan", "Garlic"], calories: 800, preparationTime: "18 min" },
-  { id: 17, name: "Penne Arrabbiata", price: 12, image: "/pizza-piedra.jpg", description: "Spicy tomato sauce pasta", category: "Pasta", ingredients: ["Penne", "Spicy tomato sauce", "Garlic", "Red pepper flakes"], calories: 550, preparationTime: "15 min" },
-  { id: 18, name: "Lasagna", price: 15, image: "/pizza-piedra.jpg", description: "Layered pasta with meat and cheese", category: "Pasta", ingredients: ["Lasagna sheets", "Ground beef", "Ricotta", "Mozzarella"], calories: 750, preparationTime: "40 min" },
-  { id: 19, name: "Carbonara", price: 14, image: "/pizza-piedra.jpg", description: "Creamy egg and bacon pasta", category: "Pasta", ingredients: ["Spaghetti", "Eggs", "Bacon", "Parmesan"], calories: 700, preparationTime: "22 min" },
-  { id: 20, name: "Pesto Pasta", price: 13, image: "/pizza-piedra.jpg", description: "Basil pesto sauce pasta", category: "Pasta", ingredients: ["Fusilli", "Basil pesto", "Pine nuts", "Parmesan"], calories: 600, preparationTime: "16 min" },
-  { id: 21, name: "Seafood Pasta", price: 16, image: "/pizza-piedra.jpg", description: "Mixed seafood in tomato sauce", category: "Pasta", ingredients: ["Linguine", "Shrimp", "Mussels", "Tomato sauce"], calories: 550, preparationTime: "25 min" },
+  // Hamburguesas
+  {
+    id: 9,
+    name: "Hamburguesa Simple",
+    price: 9000,
+    image: "https://picsum.photos/600/400?random=9",
+    description: "Pan, lechuga, tomate, carne",
+    category: "Hamburguesa",
+    ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 10,
+    name: "Hamburguesa Completa",
+    price: 11000,
+    image: "https://picsum.photos/600/400?random=10",
+    description: "Pan, lechuga, tomate, carne, huevo, jamón, queso, aderezos",
+    category: "Hamburguesa",
+    ingredients: [
+      "Pan",
+      "Lechuga",
+      "Tomate",
+      "Carne",
+      "Huevo",
+      "Jamón",
+      "Queso",
+      "Aderezos",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
 
-  // Drink
-  { id: 22, name: "Cola", price: 2, image: "/pizza-piedra.jpg", description: "Classic cola drink", category: "Drink", ingredients: ["Carbonated water", "Sugar", "Caramel color", "Phosphoric acid"], calories: 140, volume: "330ml" },
-  { id: 23, name: "Limonada", price: 3, image: "/pizza-piedra.jpg", description: "Fresh squeezed lemonade", category: "Drink", ingredients: ["Lemon juice", "Water", "Sugar"], calories: 120, volume: "400ml" },
-  { id: 24, name: "Te Helado", price: 2, image: "/pizza-piedra.jpg", description: "Refreshing iced tea", category: "Drink", ingredients: ["Black tea", "Water", "Sugar"], calories: 90, volume: "500ml" },
-  { id: 25, name: "Jugo de naranja", price: 3, image: "/pizza-piedra.jpg", description: "Freshly squeezed orange juice", category: "Drink", ingredients: ["Orange juice"], calories: 160, volume: "350ml" },
-  { id: 26, name: "Batido de leche", price: 4, image: "/pizza-piedra.jpg", description: "Creamy vanilla milkshake", category: "Drink", ingredients: ["Milk", "Vanilla ice cream", "Whipped cream"], calories: 350, volume: "400ml" },
-  { id: 27, name: "Smoothie", price: 4, image: "/pizza-piedra.jpg", description: "Mixed fruit smoothie", category: "Drink", ingredients: ["Banana", "Strawberries", "Yogurt", "Honey"], calories: 200, volume: "450ml" },
-  { id: 28, name: "Expresso", price: 2, image: "/pizza-piedra.jpg", description: "Strong Italian coffee", category: "Drink", ingredients: ["Coffee beans"], calories: 5, volume: "30ml" },
+  // Pizzas
+  {
+    id: 11,
+    name: "Steve",
+    price: 12500,
+    image: "https://picsum.photos/600/400?random=11",
+    description:
+      "Salsa, muzzarella, tomate, calabresa, huevo, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Tomate",
+      "Calabresa",
+      "Huevo",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 12,
+    name: "Muzzarella",
+    price: 7000,
+    image: "https://picsum.photos/600/400?random=12",
+    description: "Salsa, muzzarella, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: ["Salsa", "Muzzarella", "Orégano", "Aceitunas"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 13,
+    name: "Aji En Vinagre",
+    price: 7300,
+    image: "https://picsum.photos/600/400?random=13",
+    description: "Salsa, muzzarella, ajo, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: ["Salsa", "Muzzarella", "Ajo", "Orégano", "Aceitunas"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 14,
+    name: "Anchoas",
+    price: 11000,
+    image: "https://picsum.photos/600/400?random=14",
+    description: "Salsa, anchoas, morrones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: ["Salsa", "Anchoas", "Morrones", "Orégano", "Aceitunas"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 15,
+    name: "Romana",
+    price: 12500,
+    image: "https://picsum.photos/600/400?random=15",
+    description: "Salsa, muzzarella, anchoas, morrones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Anchoas",
+      "Morrones",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 16,
+    name: "Fugazzeta",
+    price: 10000,
+    image: "https://picsum.photos/600/400?random=16",
+    description: "Cebolla, muzzarella, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: ["Cebolla", "Muzzarella", "Orégano", "Aceitunas"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 17,
+    name: "Especial de Jamón y Morrones",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=17",
+    description: "Salsa, jamón, muzzarella, morrones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Jamón",
+      "Muzzarella",
+      "Morrones",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 18,
+    name: "Jamón",
+    price: 8200,
+    image: "https://picsum.photos/600/400?random=18",
+    description: "Salsa, jamón, muzzarella, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: ["Salsa", "Jamón", "Muzzarella", "Orégano", "Aceitunas"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 19,
+    name: "Napolitana",
+    price: 10000,
+    image: "https://picsum.photos/600/400?random=19",
+    description: "Salsa, muzzarella, tomate, ajo, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Tomate",
+      "Ajo",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 20,
+    name: "Napolitana Especial",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=20",
+    description:
+      "Salsa, jamón, muzzarella, tomate, ajo, parmesano, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Jamón",
+      "Muzzarella",
+      "Tomate",
+      "Ajo",
+      "Parmesano",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 21,
+    name: "Roquefort",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=21",
+    description: "Salsa, muzzarella, roquefort, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: ["Salsa", "Muzzarella", "Roquefort", "Orégano", "Aceitunas"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 22,
+    name: "Calabresa",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=22",
+    description: "Salsa, muzzarella, calabresa, morrones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Calabresa",
+      "Morrones",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 23,
+    name: "Super Picante",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=23",
+    description:
+      "Salsa, muzzarella, calabresa, morrones, picante, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Calabresa",
+      "Morrones",
+      "Picante",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 24,
+    name: "Provoleta",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=24",
+    description:
+      "Salsa, jamón, muzzarella, provolone, pimienta, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Jamón",
+      "Muzzarella",
+      "Provolone",
+      "Pimienta",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 25,
+    name: "Palmitos",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=25",
+    description:
+      "Salsa, jamón, muzzarella, palmitos, huevo, salsa golf, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Jamón",
+      "Muzzarella",
+      "Palmitos",
+      "Huevo",
+      "Salsa Golf",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 26,
+    name: "Palmitos Al Roquefort",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=26",
+    description: "Salsa, muzzarella, palmitos, roquefort, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Palmitos",
+      "Roquefort",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 27,
+    name: "Champiñones",
+    price: 14000,
+    image: "https://picsum.photos/600/400?random=27",
+    description:
+      "Salsa, muzzarella, salteado de champiñones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Salteado de champiñones",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 28,
+    name: "Ananá",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=28",
+    description:
+      "Salsa, muzzarella, jamón, ananá, morrones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Jamón",
+      "Ananá",
+      "Morrones",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 29,
+    name: "Ananá Glasé",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=29",
+    description: "Salsa, jamón, muzzarella, ananá, caramelo",
+    category: "Pizza",
+    ingredients: ["Salsa", "Jamón", "Muzzarella", "Ananá", "Caramelo"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 30,
+    name: "Atún",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=30",
+    description: "Salsa, muzzarella, atún, morrones, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Atún",
+      "Morrones",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 31,
+    name: "Luna De Miel",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=31",
+    description:
+      "Salsa, muzzarella, roquefort, apio, nueces, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Roquefort",
+      "Apio",
+      "Nueces",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 32,
+    name: "Margarita",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=32",
+    description:
+      "Salsa, muzzarella, tomate perita, albahaca, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Tomate perita",
+      "Albahaca",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 33,
+    name: "Panceta Y Verdeo O Ajíes",
+    price: 14000,
+    image: "https://picsum.photos/600/400?random=33",
+    description:
+      "Salsa, muzzarella, panceta ahumada, verdeo o ajíes, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Panceta ahumada",
+      "Verdeo o Ajíes",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 34,
+    name: "Crudo Y Rúcula",
+    price: 12000,
+    image: "https://picsum.photos/600/400?random=34",
+    description: "Salsa, muzzarella, jamón crudo, rúcula, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Jamón Crudo",
+      "Rúcula",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 35,
+    name: "Pollo Con Salsa Golf",
+    price: 14000,
+    image: "https://picsum.photos/600/400?random=35",
+    description:
+      "Salsa, muzzarella, salteado de pollo, salsa golf, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Salteado de pollo",
+      "Salsa golf",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 36,
+    name: "Cuatro Quesos",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=36",
+    description:
+      "Salsa, muzzarella, provolone, roquefort, parmesano, orégano, aceitunas",
+    category: "Pizza",
+    ingredients: [
+      "Salsa",
+      "Muzzarella",
+      "Provolone",
+      "Roquefort",
+      "Parmesano",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+
+  // Pizzas Rellenas
+  {
+    id: 37,
+    name: "Fugazza Rellena",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=37",
+    description: "Doble masa, muzzarella, jamón, cebolla, orégano, aceitunas",
+    category: "Pizza Rellena",
+    ingredients: [
+      "Doble Masa",
+      "Muzzarella",
+      "Jamón",
+      "Cebolla",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 38,
+    name: "Fugazza Super Rellena",
+    price: 15000,
+    image: "https://picsum.photos/600/400?random=38",
+    description:
+      "Doble masa, muzzarella, jamón, tomate, ajo, cebolla, orégano, aceitunas",
+    category: "Pizza Rellena",
+    ingredients: [
+      "Doble Masa",
+      "Muzzarella",
+      "Jamón",
+      "Tomate",
+      "Ajo",
+      "Cebolla",
+      "Orégano",
+      "Aceitunas",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+
+  // Calzones
+  {
+    id: 39,
+    name: "Napolitano",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=39",
+    description: "Muzzarella, tomate, ajo, jamón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Tomate", "Ajo", "Jamón"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 40,
+    name: "Calabresa",
+    price: 14700,
+    image: "https://picsum.photos/600/400?random=40",
+    description: "Muzzarella, tomate, calabresa, morrón, jamón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Tomate", "Calabresa", "Morrón", "Jamón"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 41,
+    name: "Roquefort",
+    price: 14000,
+    image: "https://picsum.photos/600/400?random=41",
+    description: "Muzzarella, tomate, roquefort, morrón, jamón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Tomate", "Roquefort", "Morrón", "Jamón"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 42,
+    name: "Atún",
+    price: 14000,
+    image: "https://picsum.photos/600/400?random=42",
+    description: "Muzzarella, tomate, atún, morrón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Tomate", "Atún", "Morrón"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 43,
+    name: "Jamón y Queso",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=43",
+    description: "Muzzarella, jamón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Jamón"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 44,
+    name: "Primavera",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=44",
+    description: "Muzzarella, tomate, morrón, huevo, jamón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Tomate", "Morrón", "Huevo", "Jamón"],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 45,
+    name: "Palmitos",
+    price: 13000,
+    image: "https://picsum.photos/600/400?random=45",
+    description: "Muzzarella, palmitos, salsa golf, tomate, morrón, jamón",
+    category: "Calzón",
+    ingredients: [
+      "Muzzarella",
+      "Palmitos",
+      "Salsa Golf",
+      "Tomate",
+      "Morrón",
+      "Jamón",
+    ],
+    calories: null,
+    preparationTime: null,
+  },
+  {
+    id: 46,
+    name: "Ananá",
+    price: 15000,
+    image: "https://picsum.photos/600/400?random=46",
+    description: "Muzzarella, ananá, morrón, jamón",
+    category: "Calzón",
+    ingredients: ["Muzzarella", "Ananá", "Morrón", "Jamón"],
+    calories: null,
+    preparationTime: null,
+  },
 ];
 
 export default function App() {
@@ -61,49 +740,62 @@ export default function App() {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
-  const filteredMenuItems = allMenuItems.filter(item => item.category === selectedCategory);
+  const filteredMenuItems = allMenuItems.filter(
+    (item) => item.category === selectedCategory
+  );
   const bestSellers = allMenuItems.slice(0, 5);
 
   const addToCart = (product) => {
-    setCartItems(prevItems => [...prevItems, { ...product, cartId: Date.now() }]);
+    setCartItems((prevItems) => [
+      ...prevItems,
+      { ...product, cartId: Date.now() },
+    ]);
   };
 
   const removeFromCart = (cartId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.cartId !== cartId));
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.cartId !== cartId)
+    );
   };
 
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   const toggleFavorite = (productId) => {
-    setFavorites(prevFavorites => {
-      if (prevFavorites.some(fav => fav.id === productId)) {
-        return prevFavorites.filter(fav => fav.id !== productId);
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.some((fav) => fav.id === productId)) {
+        return prevFavorites.filter((fav) => fav.id !== productId);
       } else {
-        const product = allMenuItems.find(item => item.id === productId);
+        const product = allMenuItems.find((item) => item.id === productId);
         return [...prevFavorites, product];
       }
     });
   };
 
   const handleSearch = (searchTerm) => {
-    const results = allMenuItems.filter(item => 
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase())
+    const results = allMenuItems.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   };
 
   const handleEditCartItem = (editedItem) => {
-    setCartItems(prevItems => prevItems.map(item => 
-      item.cartId === editedItem.cartId ? editedItem : item
-    ));
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.cartId === editedItem.cartId ? editedItem : item
+      )
+    );
   };
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.innerHeight + window.scrollY;
       const pageHeight = document.documentElement.scrollHeight;
-      
+
       if (scrollPosition > pageHeight - 200) {
         setShowFooter(true);
       } else {
@@ -111,14 +803,14 @@ export default function App() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header 
-        onOpenSidebar={() => setIsSidebarOpen(true)} 
+      <Header
+        onOpenSidebar={() => setIsSidebarOpen(true)}
         userAvatarUrl={userAvatarUrl}
         onOpenFavorites={() => setIsFavoritesModalOpen(true)}
         onOpenSearch={() => setIsSearchModalOpen(true)}
@@ -128,8 +820,8 @@ export default function App() {
           <PromoBanner />
           <BestSellers items={bestSellers} onAddToCart={addToCart} />
           <div className="sticky-header-wrapper">
-            <StickyHeader 
-              selectedCategory={selectedCategory} 
+            <StickyHeader
+              selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
             />
           </div>
@@ -138,31 +830,41 @@ export default function App() {
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 my-5 mx-3">
-              {filteredMenuItems.map(item => (
+              {filteredMenuItems.map((item) => (
                 <MenuItem
                   key={item.id}
                   {...item}
                   onAdd={addToCart}
-                  isFavorite={favorites.some(fav => fav.id === item.id)}
+                  isFavorite={favorites.some((fav) => fav.id === item.id)}
                   onToggleFavorite={toggleFavorite}
-                  
                 />
               ))}
             </div>
           </div>
         </div>
       </main>
-      <div className={`transition-opacity duration-300 ${showFooter ? 'opacity-100' : 'opacity-0'}`}>
+      <div
+        className={`transition-opacity duration-300 ${
+          showFooter ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <Footer />
       </div>
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      <FloatingCartButton 
-        itemCount={cartItems.length} 
-        onClick={() => setIsCartOpen(true)} 
+
+      {/* <FloatingCartButton
+        itemCount={cartItems.length}
+        onClick={() => setIsCartOpen(true)}
+      /> */}
+
+      <FloatingWhatsAppButton
+        phoneNumber="+542984307550"
+        message="Hola, estuve viendo su menu en linea y quisiera ordenar."
       />
-      <PaymentCard 
-        cartItems={cartItems} 
-        onRemove={removeFromCart} 
+
+      <PaymentCard
+        cartItems={cartItems}
+        onRemove={removeFromCart}
         total={total}
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -194,4 +896,3 @@ export default function App() {
     </div>
   );
 }
-

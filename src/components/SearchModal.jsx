@@ -54,7 +54,7 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
               onClick={handleClear}
               className="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
-              Limpiar
+              Todos
             </button>
           </div>
         </form>

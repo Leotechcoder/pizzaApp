@@ -80,9 +80,9 @@ export function MenuItem({
           </div> */}
           <div className="flex items-center justify-between mt-3">
             <div className="flex items-center gap-2">
-              <span className="text-green-500 font-semibold text-lg">${price.toFixed(2)}</span>
+              <span className="text-green-500 font-semibold text-lg">${price}</span>
               {originalPrice && (
-                <span className="text-gray-400 line-through text-sm">${originalPrice.toFixed(2)}</span>
+                <span className="text-gray-400 line-through text-sm">${originalPrice}</span>
               )}
             </div>
             {/* <button

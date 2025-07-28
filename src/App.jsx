@@ -816,7 +816,7 @@ export default function App() {
         onOpenSearch={() => setIsSearchModalOpen(true)}
       />
       <main className="flex-grow">
-        <div className="container mx-auto px-2">
+        <div className="container mx-auto sm:px-0.5">
           <PromoBanner />
           <BestSellers items={bestSellers} onAddToCart={addToCart} />
           <div className="sticky-header-wrapper">

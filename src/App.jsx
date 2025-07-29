@@ -17,8 +17,8 @@ const allMenuItems = [
   {
     id: 1,
     name: "Carne",
-    price: 13000,
-    image: "https://picsum.photos/600/400?random=1",
+    price: 18000,
+    image: "/empanadas-varias.jpg",
     description: "Carne (x docena)",
     category: "Empanada",
     ingredients: [], // Ingredients not specified for empanadas in the image
@@ -28,8 +28,8 @@ const allMenuItems = [
   {
     id: 2,
     name: "Pollo",
-    price: 6500,
-    image: "https://picsum.photos/600/400?random=2",
+    price: 18000,
+    image: "/empanadas-varias.jpg",
     description: "Pollo (x docena)",
     category: "Empanada",
     ingredients: [],
@@ -39,8 +39,8 @@ const allMenuItems = [
   {
     id: 3,
     name: "Jamón y Queso",
-    price: null, // Price not legible
-    image: "https://picsum.photos/600/400?random=3",
+    price: 18000, // Price not legible
+    image: "/empanadas-varias.jpg",
     description: "Jamón y Queso",
     category: "Empanada",
     ingredients: [],
@@ -50,8 +50,8 @@ const allMenuItems = [
   {
     id: 4,
     name: "Humita",
-    price: 1200,
-    image: "https://picsum.photos/600/400?random=4",
+    price: 18000,
+    image: "/empanadas-varias.jpg",
     description: "Humita (x unidad)",
     category: "Empanada",
     ingredients: [],
@@ -61,8 +61,8 @@ const allMenuItems = [
   {
     id: 5,
     name: "Roquefort",
-    price: null, // Price not legible
-    image: "https://picsum.photos/600/400?random=5",
+    price: 18000, // Price not legible
+    image: "/empanadas-varias.jpg",
     description: "Roquefort",
     category: "Empanada",
     ingredients: [],
@@ -72,8 +72,8 @@ const allMenuItems = [
   {
     id: 6,
     name: "Cebolla y Queso",
-    price: null, // Price not legible
-    image: "https://picsum.photos/600/400?random=6",
+    price: 18000, // Price not legible
+    image: "/empanadas-varias.jpg",
     description: "Cebolla y Queso",
     category: "Empanada",
     ingredients: [],
@@ -85,8 +85,8 @@ const allMenuItems = [
   {
     id: 7,
     name: "Lomo Simple",
-    price: 11000,
-    image: "https://picsum.photos/600/400?random=7",
+    price: 17000,
+    image: "/lomo.jpg",
     description: "Pan, lechuga, tomate, carne",
     category: "Lomo",
     ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
@@ -96,8 +96,8 @@ const allMenuItems = [
   {
     id: 8,
     name: "Lomo Completo",
-    price: 13000,
-    image: "https://picsum.photos/600/400?random=8",
+    price: 20000,
+    image: "/lomo.jpg",
     description: "Pan, lechuga, tomate, carne, huevo, jamón, queso, aderezos",
     category: "Lomo",
     ingredients: [
@@ -118,8 +118,8 @@ const allMenuItems = [
   {
     id: 9,
     name: "Hamburguesa Simple",
-    price: 9000,
-    image: "https://picsum.photos/600/400?random=9",
+    price: 16000,
+    image: "/lomo.jpg",
     description: "Pan, lechuga, tomate, carne",
     category: "Hamburguesa",
     ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
@@ -129,8 +129,8 @@ const allMenuItems = [
   {
     id: 10,
     name: "Hamburguesa Completa",
-    price: 11000,
-    image: "https://picsum.photos/600/400?random=10",
+    price: 18000,
+    image: "/lomo.jpg",
     description: "Pan, lechuga, tomate, carne, huevo, jamón, queso, aderezos",
     category: "Hamburguesa",
     ingredients: [
@@ -152,7 +152,7 @@ const allMenuItems = [
     id: 11,
     name: "Steve",
     price: 12500,
-    image: "https://picsum.photos/600/400?random=11",
+    image: "/pizza-mixta.jpg",
     description:
       "Salsa, muzzarella, tomate, calabresa, huevo, orégano, aceitunas",
     category: "Pizza",
@@ -172,7 +172,7 @@ const allMenuItems = [
     id: 12,
     name: "Muzzarella",
     price: 7000,
-    image: "https://picsum.photos/600/400?random=12",
+    image: "/mixta-9-7.jpg",
     description: "Salsa, muzzarella, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Muzzarella", "Orégano", "Aceitunas"],
@@ -183,7 +183,7 @@ const allMenuItems = [
     id: 13,
     name: "Aji En Vinagre",
     price: 7300,
-    image: "https://picsum.photos/600/400?random=13",
+    image: "/22.jpg",
     description: "Salsa, muzzarella, ajo, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Muzzarella", "Ajo", "Orégano", "Aceitunas"],
@@ -194,7 +194,7 @@ const allMenuItems = [
     id: 14,
     name: "Anchoas",
     price: 11000,
-    image: "https://picsum.photos/600/400?random=14",
+    image: "/pizza-piedra.jpg",
     description: "Salsa, anchoas, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Anchoas", "Morrones", "Orégano", "Aceitunas"],
@@ -205,7 +205,7 @@ const allMenuItems = [
     id: 15,
     name: "Romana",
     price: 12500,
-    image: "https://picsum.photos/600/400?random=15",
+    image: "/pizza-piedra.jpg",
     description: "Salsa, muzzarella, anchoas, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -223,7 +223,7 @@ const allMenuItems = [
     id: 16,
     name: "Fugazzeta",
     price: 10000,
-    image: "https://picsum.photos/600/400?random=16",
+    image: "/25-14.jpg",
     description: "Cebolla, muzzarella, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Cebolla", "Muzzarella", "Orégano", "Aceitunas"],
@@ -234,7 +234,7 @@ const allMenuItems = [
     id: 17,
     name: "Especial de Jamón y Morrones",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=17",
+    image: "/6.jpg",
     description: "Salsa, jamón, muzzarella, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -252,7 +252,7 @@ const allMenuItems = [
     id: 18,
     name: "Jamón",
     price: 8200,
-    image: "https://picsum.photos/600/400?random=18",
+    image: "/mixta-9-7.jpg",
     description: "Salsa, jamón, muzzarella, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Jamón", "Muzzarella", "Orégano", "Aceitunas"],
@@ -263,7 +263,7 @@ const allMenuItems = [
     id: 19,
     name: "Napolitana",
     price: 10000,
-    image: "https://picsum.photos/600/400?random=19",
+    image: "/mixta-9-7.jpg",
     description: "Salsa, muzzarella, tomate, ajo, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -281,7 +281,7 @@ const allMenuItems = [
     id: 20,
     name: "Napolitana Especial",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=20",
+    image: "/mixta-9-7.jpg",
     description:
       "Salsa, jamón, muzzarella, tomate, ajo, parmesano, orégano, aceitunas",
     category: "Pizza",
@@ -302,7 +302,7 @@ const allMenuItems = [
     id: 21,
     name: "Roquefort",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=21",
+    image: "/25-14.jpg",
     description: "Salsa, muzzarella, roquefort, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Muzzarella", "Roquefort", "Orégano", "Aceitunas"],
@@ -313,7 +313,7 @@ const allMenuItems = [
     id: 22,
     name: "Calabresa",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=22",
+    image: "/25-14.jpg",
     description: "Salsa, muzzarella, calabresa, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -331,7 +331,7 @@ const allMenuItems = [
     id: 23,
     name: "Super Picante",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=23",
+    image: "/pizza-piedra.jpg",
     description:
       "Salsa, muzzarella, calabresa, morrones, picante, orégano, aceitunas",
     category: "Pizza",
@@ -351,7 +351,7 @@ const allMenuItems = [
     id: 24,
     name: "Provoleta",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=24",
+    image: "/25-14.jpg",
     description:
       "Salsa, jamón, muzzarella, provolone, pimienta, orégano, aceitunas",
     category: "Pizza",
@@ -371,7 +371,7 @@ const allMenuItems = [
     id: 25,
     name: "Palmitos",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=25",
+    image: "/25-14.jpg",
     description:
       "Salsa, jamón, muzzarella, palmitos, huevo, salsa golf, orégano, aceitunas",
     category: "Pizza",
@@ -392,7 +392,7 @@ const allMenuItems = [
     id: 26,
     name: "Palmitos Al Roquefort",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=26",
+    image: "/25-14.jpg",
     description: "Salsa, muzzarella, palmitos, roquefort, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -410,7 +410,7 @@ const allMenuItems = [
     id: 27,
     name: "Champiñones",
     price: 14000,
-    image: "https://picsum.photos/600/400?random=27",
+    image: "/pizzamixta.jpg",
     description:
       "Salsa, muzzarella, salteado de champiñones, orégano, aceitunas",
     category: "Pizza",
@@ -428,7 +428,7 @@ const allMenuItems = [
     id: 28,
     name: "Ananá",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=28",
+    image: "/pizza-margarita.jpg",
     description:
       "Salsa, muzzarella, jamón, ananá, morrones, orégano, aceitunas",
     category: "Pizza",
@@ -448,7 +448,7 @@ const allMenuItems = [
     id: 29,
     name: "Ananá Glasé",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=29",
+    image: "/pizza-piedra.jpg",
     description: "Salsa, jamón, muzzarella, ananá, caramelo",
     category: "Pizza",
     ingredients: ["Salsa", "Jamón", "Muzzarella", "Ananá", "Caramelo"],
@@ -459,7 +459,7 @@ const allMenuItems = [
     id: 30,
     name: "Atún",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=30",
+    image: "/pizzas-piedra.jpg",
     description: "Salsa, muzzarella, atún, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -477,7 +477,7 @@ const allMenuItems = [
     id: 31,
     name: "Luna De Miel",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=31",
+    image: "/25-14.jpg",
     description:
       "Salsa, muzzarella, roquefort, apio, nueces, orégano, aceitunas",
     category: "Pizza",
@@ -497,7 +497,7 @@ const allMenuItems = [
     id: 32,
     name: "Margarita",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=32",
+    image: "/pizza-margarita.jpg",
     description:
       "Salsa, muzzarella, tomate perita, albahaca, orégano, aceitunas",
     category: "Pizza",
@@ -516,7 +516,7 @@ const allMenuItems = [
     id: 33,
     name: "Panceta Y Verdeo O Ajíes",
     price: 14000,
-    image: "https://picsum.photos/600/400?random=33",
+    image: "/22.jpg",
     description:
       "Salsa, muzzarella, panceta ahumada, verdeo o ajíes, orégano, aceitunas",
     category: "Pizza",
@@ -535,7 +535,7 @@ const allMenuItems = [
     id: 34,
     name: "Crudo Y Rúcula",
     price: 12000,
-    image: "https://picsum.photos/600/400?random=34",
+    image: "/pizzamixta.jpg",
     description: "Salsa, muzzarella, jamón crudo, rúcula, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -553,7 +553,7 @@ const allMenuItems = [
     id: 35,
     name: "Pollo Con Salsa Golf",
     price: 14000,
-    image: "https://picsum.photos/600/400?random=35",
+    image: "/pizza-mixta.jpg",
     description:
       "Salsa, muzzarella, salteado de pollo, salsa golf, orégano, aceitunas",
     category: "Pizza",
@@ -572,7 +572,7 @@ const allMenuItems = [
     id: 36,
     name: "Cuatro Quesos",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=36",
+    image: "/25-14.jpg",
     description:
       "Salsa, muzzarella, provolone, roquefort, parmesano, orégano, aceitunas",
     category: "Pizza",
@@ -594,7 +594,7 @@ const allMenuItems = [
     id: 37,
     name: "Fugazza Rellena",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=37",
+    image: "",
     description: "Doble masa, muzzarella, jamón, cebolla, orégano, aceitunas",
     category: "Pizza Rellena",
     ingredients: [
@@ -612,7 +612,7 @@ const allMenuItems = [
     id: 38,
     name: "Fugazza Super Rellena",
     price: 15000,
-    image: "https://picsum.photos/600/400?random=38",
+    image: "",
     description:
       "Doble masa, muzzarella, jamón, tomate, ajo, cebolla, orégano, aceitunas",
     category: "Pizza Rellena",
@@ -635,7 +635,7 @@ const allMenuItems = [
     id: 39,
     name: "Napolitano",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=39",
+    image: "",
     description: "Muzzarella, tomate, ajo, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Ajo", "Jamón"],
@@ -646,7 +646,7 @@ const allMenuItems = [
     id: 40,
     name: "Calabresa",
     price: 14700,
-    image: "https://picsum.photos/600/400?random=40",
+    image: "",
     description: "Muzzarella, tomate, calabresa, morrón, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Calabresa", "Morrón", "Jamón"],
@@ -657,7 +657,7 @@ const allMenuItems = [
     id: 41,
     name: "Roquefort",
     price: 14000,
-    image: "https://picsum.photos/600/400?random=41",
+    image: "",
     description: "Muzzarella, tomate, roquefort, morrón, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Roquefort", "Morrón", "Jamón"],
@@ -668,7 +668,7 @@ const allMenuItems = [
     id: 42,
     name: "Atún",
     price: 14000,
-    image: "https://picsum.photos/600/400?random=42",
+    image: "",
     description: "Muzzarella, tomate, atún, morrón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Atún", "Morrón"],
@@ -679,7 +679,7 @@ const allMenuItems = [
     id: 43,
     name: "Jamón y Queso",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=43",
+    image: "",
     description: "Muzzarella, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Jamón"],
@@ -690,7 +690,7 @@ const allMenuItems = [
     id: 44,
     name: "Primavera",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=44",
+    image: "",
     description: "Muzzarella, tomate, morrón, huevo, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Morrón", "Huevo", "Jamón"],
@@ -701,7 +701,7 @@ const allMenuItems = [
     id: 45,
     name: "Palmitos",
     price: 13000,
-    image: "https://picsum.photos/600/400?random=45",
+    image: "",
     description: "Muzzarella, palmitos, salsa golf, tomate, morrón, jamón",
     category: "Calzón",
     ingredients: [
@@ -719,7 +719,7 @@ const allMenuItems = [
     id: 46,
     name: "Ananá",
     price: 15000,
-    image: "https://picsum.photos/600/400?random=46",
+    image: "",
     description: "Muzzarella, ananá, morrón, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Ananá", "Morrón", "Jamón"],

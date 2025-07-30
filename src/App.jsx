@@ -172,7 +172,7 @@ const allMenuItems = [
     id: 12,
     name: "Muzzarella",
     price: 7000,
-    image: "/pizzas/muzza.jpeg",
+    image: "/pizzas/muzzafondo.jpg",
     description: "Salsa, muzzarella, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Muzzarella", "Orégano", "Aceitunas"],
@@ -223,7 +223,7 @@ const allMenuItems = [
     id: 16,
     name: "Fugazzeta",
     price: 10000,
-    image: "/pizzas/fugazzeta.jpeg",
+    image: "/pizzas/pizzaconfondo.jpg",
     description: "Cebolla, muzzarella, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Cebolla", "Muzzarella", "Orégano", "Aceitunas"],
@@ -234,7 +234,7 @@ const allMenuItems = [
     id: 17,
     name: "Especial de Jamón y Morrones",
     price: 12000,
-    image: "/pizzas/jamonymorron.jpeg",
+    image: "/pizzas/jamonymorronfondo.jpg",
     description: "Salsa, jamón, muzzarella, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -263,7 +263,7 @@ const allMenuItems = [
     id: 19,
     name: "Napolitana",
     price: 10000,
-    image: "/pizzas/napolitana.jpeg",
+    image: "/pizzas/napolitanafondo.jpg",
     description: "Salsa, muzzarella, tomate, ajo, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -281,7 +281,7 @@ const allMenuItems = [
     id: 20,
     name: "Napolitana Especial",
     price: 12000,
-    image: "/pizzas/napolitanaespecial.jpeg",
+    image: "/pizzas/napolitanaespecialfondo.jpg",
     description:
       "Salsa, jamón, muzzarella, tomate, ajo, parmesano, orégano, aceitunas",
     category: "Pizza",
@@ -459,7 +459,7 @@ const allMenuItems = [
     id: 30,
     name: "Atún",
     price: 13000,
-    image: "/pizzas/atun.jpeg",
+    image: "",
     description: "Salsa, muzzarella, atún, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -497,7 +497,7 @@ const allMenuItems = [
     id: 32,
     name: "Margarita",
     price: 12000,
-    image: "/pizzas/margarita.jpeg",
+    image: "/pizzas/margaritafondo.jpg",
     description:
       "Salsa, muzzarella, tomate perita, albahaca, orégano, aceitunas",
     category: "Pizza",
@@ -516,7 +516,7 @@ const allMenuItems = [
     id: 33,
     name: "Panceta Y Verdeo O Ajíes",
     price: 14000,
-    image: "/22.jpg",
+    image: "",
     description:
       "Salsa, muzzarella, panceta ahumada, verdeo o ajíes, orégano, aceitunas",
     category: "Pizza",
@@ -535,7 +535,7 @@ const allMenuItems = [
     id: 34,
     name: "Crudo Y Rúcula",
     price: 12000,
-    image: "/pizzamixta.jpg",
+    image: "",
     description: "Salsa, muzzarella, jamón crudo, rúcula, orégano, aceitunas",
     category: "Pizza",
     ingredients: [

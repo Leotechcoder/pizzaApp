@@ -70,18 +70,18 @@ export function Sidebar({ isOpen, onClose }) {
 
           <div className="mt-4">
             <h2 className="text-lg font-semibold mb-2">Síguenos</h2>
-            <div className="flex space-x-4">
-              <Facebook className="w-6 h-6 text-blue-600 cursor-pointer" />
-              <Instagram className="w-6 h-6 text-orange-500 cursor-pointer" />
+            <div className="flex space-x-4 mt-3">
+              <Facebook className="w-8 h-8 text-blue-600 cursor-pointer" />
+              <Instagram className="w-8 h-8 text-orange-500 cursor-pointer" />
             </div>
           </div>
 
-          <button
+          {/* <button
             onClick={onClose}
             className="mt-6 w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors duration-300"
           >
             Ordenar ahora
-          </button>
+          </button> */}
         </div>
       </aside>
       {isOpen && (

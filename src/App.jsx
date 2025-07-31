@@ -19,67 +19,73 @@ const allMenuItems = [
     id: 1,
     name: "Carne",
     price: 18000,
-    image: "/empanadas-varias.jpg",
+    image: "/empanadas/empanada-carne.jpeg",
     description: "Precio x docena",
     category: "Empanada",
     ingredients: ["Cebolla","Morron","Carne Vacuna","Condimentos", "Huevo"], // Ingredients not specified for empanadas in the image
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 2,
     name: "Pollo",
     price: 18000,
-    image: "/empanadas-varias.jpg",
+    image: "/empanadas/empanada-pollo.jpeg",
     description: "Precio x docena",
     category: "Empanada",
     ingredients: ["Cebolla","Morron","Carne de Pollo","Condimentos"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 3,
     name: "Jamón y Queso",
     price: 18000, // Price not legible
-    image: "/empanadas-varias.jpg",
+    image: "/empanadas/empanada-jamon1.jpeg",
     description: "Precio x docena",
     category: "Empanada",
     ingredients: ["Jamón","Queso"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 4,
     name: "Humita",
     price: 18000,
-    image: "/empanadas-varias.jpg",
+    image: "",
     description: "Precio x docena",
     category: "Empanada",
     ingredients: ["Cebolla","Choclo","Leche", "Condimentos"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 5,
     name: "Roquefort",
     price: 18000, // Price not legible
-    image: "/empanadas-varias.jpg",
+    image: "/empanadas/empanada-roquefort.jpeg",
     description: "Precio x docena",
     category: "Empanada",
     ingredients: ["Roquefort", "Queso"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 6,
     name: "Cebolla y Queso",
     price: 18000, // Price not legible
-    image: "/empanadas-varias.jpg",
+    image: "",
     description: "Precio x docena",
     category: "Empanada",
     ingredients: ["Cebolla","Queso", "Condimentos"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
 
   // Lomos
@@ -93,6 +99,7 @@ const allMenuItems = [
     ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 8,
@@ -113,6 +120,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
 
   // Hamburguesas
@@ -126,6 +134,7 @@ const allMenuItems = [
     ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 10,
@@ -146,6 +155,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
 
   // Pizzas
@@ -168,6 +178,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 12,
@@ -179,6 +190,7 @@ const allMenuItems = [
     ingredients: ["Salsa", "Muzzarella", "Orégano", "Aceitunas"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 13,
@@ -190,6 +202,7 @@ const allMenuItems = [
     ingredients: ["Salsa", "Muzzarella", "Ajo", "Orégano", "Aceitunas"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 14,
@@ -201,6 +214,7 @@ const allMenuItems = [
     ingredients: ["Salsa", "Anchoas", "Morrones", "Orégano", "Aceitunas"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 15,
@@ -219,6 +233,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 16,
@@ -230,6 +245,7 @@ const allMenuItems = [
     ingredients: ["Cebolla", "Muzzarella", "Orégano", "Aceitunas"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 17,
@@ -248,6 +264,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 18,
@@ -259,6 +276,7 @@ const allMenuItems = [
     ingredients: ["Salsa", "Jamón", "Muzzarella", "Orégano", "Aceitunas"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 19,
@@ -277,6 +295,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 20,
@@ -298,6 +317,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 21,
@@ -309,6 +329,7 @@ const allMenuItems = [
     ingredients: ["Salsa", "Muzzarella", "Roquefort", "Orégano", "Aceitunas"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 22,
@@ -327,6 +348,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 23,
@@ -347,6 +369,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 24,
@@ -367,6 +390,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 25,
@@ -388,6 +412,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 26,
@@ -406,6 +431,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 27,
@@ -424,6 +450,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 28,
@@ -444,6 +471,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 29,
@@ -455,6 +483,7 @@ const allMenuItems = [
     ingredients: ["Salsa", "Jamón", "Muzzarella", "Ananá", "Caramelo"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 30,
@@ -473,6 +502,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 31,
@@ -493,6 +523,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 32,
@@ -512,6 +543,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 33,
@@ -531,6 +563,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 34,
@@ -549,6 +582,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 35,
@@ -568,6 +602,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 36,
@@ -588,6 +623,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
 
   // Pizzas Rellenas
@@ -595,7 +631,7 @@ const allMenuItems = [
     id: 37,
     name: "Fugazza Rellena",
     price: 13000,
-    image: "",
+    image: "/pizzas/fugazza-rellena.jpg",
     description: "Doble masa, muzzarella, jamón, cebolla, orégano, aceitunas",
     category: "Pizza Rellena",
     ingredients: [
@@ -608,6 +644,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 38,
@@ -629,6 +666,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
 
   // Calzones
@@ -642,6 +680,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Tomate", "Ajo", "Jamón"],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 40,
@@ -653,6 +692,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Tomate", "Calabresa", "Morrón", "Jamón"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 41,
@@ -664,6 +704,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Tomate", "Roquefort", "Morrón", "Jamón"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 42,
@@ -675,6 +716,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Tomate", "Atún", "Morrón"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 43,
@@ -686,6 +728,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Jamón"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 44,
@@ -697,6 +740,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Tomate", "Morrón", "Huevo", "Jamón"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
   {
     id: 45,
@@ -715,6 +759,7 @@ const allMenuItems = [
     ],
     calories: null,
     preparationTime: null,
+    bestseller: true,
   },
   {
     id: 46,
@@ -726,6 +771,7 @@ const allMenuItems = [
     ingredients: ["Muzzarella", "Ananá", "Morrón", "Jamón"],
     calories: null,
     preparationTime: null,
+    bestseller: false,
   },
 ];
 
@@ -747,7 +793,13 @@ export default function App() {
 
   /*En esta funcion tengo que manejar la logica de los productos mas vendidos. Se 
   extraeran de la lista de allMenuItems, los items que tengan el campo mas vendido como si. */
-  const bestSellers = allMenuItems.slice(0, 5);
+  
+  const getBestsellers = (listItems) => {
+    return listItems.filter(item => item.bestseller === true);
+  };
+
+  const bestSellers = getBestsellers(allMenuItems); 
+
 
   const addToCart = (product) => {
     setCartItems((prevItems) => [

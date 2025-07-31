@@ -797,8 +797,19 @@ export default function App() {
   const getBestsellers = (listItems) => {
     return listItems.filter(item => item.bestseller === true);
   };
+  const bestRandom = getBestsellers(allMenuItems); 
 
-  const bestSellers = getBestsellers(allMenuItems); 
+  /*Esta funcion devuelve el mismo array con los elementos en orden aleatorio */
+  function shuffleArray(array) {
+    const shuffled = [...array]; // copiar el array original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]; // swap
+    }
+    return shuffled;
+  }
+
+  const bestSellers = shuffleArray(bestRandom);
 
 
   const addToCart = (product) => {

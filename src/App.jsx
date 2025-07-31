@@ -12,6 +12,7 @@ import FavoritesModal from "./components/FavoritesModal";
 import SearchModal from "./components/SearchModal";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
 
+/*Base de datos provisoria, mas adelante cambiar por tabla en la base de datos postgresql */
 const allMenuItems = [
   // Empanadas
   {
@@ -19,9 +20,9 @@ const allMenuItems = [
     name: "Carne",
     price: 18000,
     image: "/empanadas-varias.jpg",
-    description: "Carne (x docena)",
+    description: "Precio x docena",
     category: "Empanada",
-    ingredients: [], // Ingredients not specified for empanadas in the image
+    ingredients: ["Cebolla","Morron","Carne Vacuna","Condimentos", "Huevo"], // Ingredients not specified for empanadas in the image
     calories: null,
     preparationTime: null,
   },
@@ -30,9 +31,9 @@ const allMenuItems = [
     name: "Pollo",
     price: 18000,
     image: "/empanadas-varias.jpg",
-    description: "Pollo (x docena)",
+    description: "Precio x docena",
     category: "Empanada",
-    ingredients: [],
+    ingredients: ["Cebolla","Morron","Carne de Pollo","Condimentos"],
     calories: null,
     preparationTime: null,
   },
@@ -41,9 +42,9 @@ const allMenuItems = [
     name: "Jamón y Queso",
     price: 18000, // Price not legible
     image: "/empanadas-varias.jpg",
-    description: "Jamón y Queso",
+    description: "Precio x docena",
     category: "Empanada",
-    ingredients: [],
+    ingredients: ["Jamón","Queso"],
     calories: null,
     preparationTime: null,
   },
@@ -52,9 +53,9 @@ const allMenuItems = [
     name: "Humita",
     price: 18000,
     image: "/empanadas-varias.jpg",
-    description: "Humita (x unidad)",
+    description: "Precio x docena",
     category: "Empanada",
-    ingredients: [],
+    ingredients: ["Cebolla","Choclo","Leche", "Condimentos"],
     calories: null,
     preparationTime: null,
   },
@@ -63,9 +64,9 @@ const allMenuItems = [
     name: "Roquefort",
     price: 18000, // Price not legible
     image: "/empanadas-varias.jpg",
-    description: "Roquefort",
+    description: "Precio x docena",
     category: "Empanada",
-    ingredients: [],
+    ingredients: ["Roquefort", "Queso"],
     calories: null,
     preparationTime: null,
   },
@@ -74,9 +75,9 @@ const allMenuItems = [
     name: "Cebolla y Queso",
     price: 18000, // Price not legible
     image: "/empanadas-varias.jpg",
-    description: "Cebolla y Queso",
+    description: "Precio x docena",
     category: "Empanada",
-    ingredients: [],
+    ingredients: ["Cebolla","Queso", "Condimentos"],
     calories: null,
     preparationTime: null,
   },
@@ -743,6 +744,9 @@ export default function App() {
   const filteredMenuItems = allMenuItems.filter(
     (item) => item.category === selectedCategory
   );
+
+  /*En esta funcion tengo que manejar la logica de los productos mas vendidos. Se 
+  extraeran de la lista de allMenuItems, los items que tengan el campo mas vendido como si. */
   const bestSellers = allMenuItems.slice(0, 5);
 
   const addToCart = (product) => {
@@ -774,14 +778,34 @@ export default function App() {
     });
   };
 
+  /*Manejador de busqueda en el nombre o descripcion */
+  const normalizeText = (text) => {
+    return text
+      .toLowerCase()
+      .normalize("NFD") // separa letras y tildes (e.g., "á" → "á")
+      .replace(/[\u0300-\u036f]/g, ""); // elimina los signos diacríticos (tildes)
+  };
+
   const handleSearch = (searchTerm) => {
-    const results = allMenuItems.filter(
-      (item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const normalizedSearch = normalizeText(searchTerm);
+    const keywords = normalizedSearch
+      .split(" ")
+      .filter((word) => word.length > 2); // ignora palabras muy cortas como "de", "la"
+
+    const results = allMenuItems.filter((item) => {
+      const name = normalizeText(item.name);
+      const description = normalizeText(item.description);
+
+      return keywords.some(
+        (keyword) => name.includes(keyword) || description.includes(keyword)
+      );
+    });
+
     setSearchResults(results);
   };
+
+
+
 
   const handleEditCartItem = (editedItem) => {
     setCartItems((prevItems) =>

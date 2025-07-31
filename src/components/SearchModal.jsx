@@ -11,10 +11,10 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
     onSearch(searchTerm);
   };
 
-  const handleClear = () => {
-    setSearchTerm('');
-    onSearch('');
-  };
+  // const handleClear = () => {
+  //   setSearchTerm('');
+  //   onSearch('');
+  // };
 
   const handleClose = () => {
     setSearchTerm('');
@@ -58,6 +58,7 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
             </button> */}
           </div>
         </form>
+
         {searchResults.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {searchResults.map((product) => (
@@ -76,6 +77,7 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
         ) : (
           <p className="text-center text-gray-500">No se encontraron productos.</p>
         )}
+        
       </div>
     </div>
   );

@@ -1,59 +1,83 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import { useBackButton } from '../hooks/useBackButton'; // Assuming this hook exists and is correctly implemented
 
 function ProductDetailModal({ isOpen, onClose, product }) {
-  // useBackButton(isOpen, onClose); // Keep if you want back button to close modal
-
   if (!isOpen || !product) return null;
 
-  // Function to calculate pizza prices based on size
+  // Cálculo de precios de pizza por tamaño
   const getPizzaPriceBySize = (basePrice, size) => {
-    if (!basePrice) return 'Consultar precio'; // Handle cases where basePrice is null
+    if (!basePrice) return 'Consultar precio';
     switch (size) {
       case 'Chica':
-        return (basePrice * 0.8).toFixed(0); // 80% of base price
+        return (basePrice * 0.8).toFixed(0);
       case 'Mediana':
-        return basePrice.toFixed(0); // Base price
+        return basePrice.toFixed(0);
       case 'Grande':
-        return (basePrice * 1.2).toFixed(0); // 120% of base price
+        return (basePrice * 1.2).toFixed(0);
       default:
-        return basePrice.toFixed(0); // Fallback to base price
+        return basePrice.toFixed(0);
     }
   };
+
+  // Cálculo de precios para empanadas según docena
+  const getEmpanadaPrices = (dozenPrice) => {
+    const unit = dozenPrice / 12;
+    return {
+      unit: Math.round(unit),
+      x4: Math.round(unit * 4),
+      x6: Math.round(unit * 6),
+      x8: Math.round(unit * 8),
+      dozen: dozenPrice
+    };
+  };
+
+  const isPizza =
+    product.category === 'Pizza' || product.category === 'Pizza Rellena';
+  const isEmpanada = product.category === 'Empanada';
+
+  const empanadaPrices = isEmpanada && product.price
+    ? getEmpanadaPrices(product.price)
+    : null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-lg p-8 relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
           <X className="w-6 h-6" />
         </button>
 
-        <h2 className="text-3xl font-bold mb-4 text-center">{product.name}</h2>
+        <h2 className="text-3xl font-bold mb-2 text-center">{product.name}</h2>
         <p className="text-gray-700 mb-4 text-center">{product.category}</p>
 
         {product.image && (
-          <img 
-            src={product.image} 
-            alt={product.name} 
-            className="w-full h-48 object-cover rounded-lg mb-4" 
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-48 object-cover rounded-lg mb-4"
           />
         )}
-
-        {/* <p className="text-gray-700 mb-4 text-center">{product.description}</p> */}
 
         <div className="mb-4 p-4 bg-gray-50 rounded-lg">
           <h3 className="font-semibold mb-2 text-lg">Ingredientes:</h3>
           {product.ingredients && product.ingredients.length > 0 ? (
-            <p className="text-base text-gray-800">{product.ingredients.join(', ')}</p>
+            <p className="text-base text-gray-800">
+              {product.ingredients.join(', ')}
+            </p>
           ) : (
-            <p className="text-base text-gray-800">Ingredientes no especificados.</p>
+            <p className="text-base text-gray-800">
+              Ingredientes no especificados.
+            </p>
           )}
         </div>
 
-        {product.category === 'Pizza' || product.category === 'Pizza Rellena' ? (
+        {isPizza && (
           <div className="mb-4 p-4 bg-red-50 rounded-lg">
-            <h3 className="font-semibold mb-2 text-lg">Tamaños y Precios (Aprox.):</h3>
+            <h3 className="font-semibold mb-2 text-lg">
+              Tamaños y Precios (Aprox.):
+            </h3>
             <ul className="list-disc list-inside text-gray-800">
               <li>Chica: ${getPizzaPriceBySize(product.price, 'Chica')}</li>
               <li>Mediana: ${getPizzaPriceBySize(product.price, 'Mediana')}</li>
@@ -65,17 +89,33 @@ function ProductDetailModal({ isOpen, onClose, product }) {
               </p>
             )}
           </div>
-        ) : (
-          <div className="mb-4 p-4 bg-green-50 rounded-lg">
-            <h3 className="font-semibold mb-2 text-lg">Precio:</h3>
-            <p className="text-2xl font-bold text-green-700">
-              {product.price ? `$${product.price.toLocaleString('es-AR')}` : 'Consultar precio'}
-            </p>
+        )}
+
+        {isEmpanada && empanadaPrices && (
+          <div className="mb-4 p-4 bg-yellow-50 rounded-lg">
+            <h3 className="font-semibold mb-2 text-lg">
+              Precios por Cantidad (Aprox.):
+            </h3>
+            <ul className="list-disc list-inside text-gray-800">
+              <li>1 unidad: ${empanadaPrices.unit}</li>
+              <li>4 unidades: ${empanadaPrices.x4}</li>
+              <li>6 unidades: ${empanadaPrices.x6}</li>
+              <li>8 unidades: ${empanadaPrices.x8}</li>
+              <li>12 unidades: ${empanadaPrices.dozen}</li>
+            </ul>
           </div>
         )}
 
-        {/* Removed quantity selector and "Add to cart" button */}
-        {/* Removed customisation options like crust types, bun types, toppings */}
+        {!isPizza && !isEmpanada && (
+          <div className="mb-4 p-4 bg-green-50 rounded-lg">
+            <h3 className="font-semibold mb-2 text-lg">Precio:</h3>
+            <p className="text-2xl font-bold text-green-700">
+              {product.price
+                ? `$${product.price.toLocaleString('es-AR')}`
+                : 'Consultar precio'}
+            </p>
+          </div>
+        )}
 
         <div className="text-center mt-6">
           <button

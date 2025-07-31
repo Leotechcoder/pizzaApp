@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 
 export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSearch }) {
   return (
-    <header className="flex items-center justify-between px-4 py-3 bg-white shadow-sm">
+    <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-3 bg-white shadow-sm">
       <Logo />
       {/* <div className="hidden md:flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2 flex-grow max-w-md mx-4">
         <input

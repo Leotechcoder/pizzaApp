@@ -11,9 +11,9 @@ export function StickyHeader({ selectedCategory, onSelectCategory }) {
       if (headerRef.current && placeholderRef.current) {
         const placeholderRect = placeholderRef.current.getBoundingClientRect();
 
-        if (placeholderRect.top <= 0 && !isSticky) {
+        if (placeholderRect.top <= 20 && !isSticky) {
           setIsSticky(true);
-        } else if (placeholderRect.top > 0 && isSticky) {
+        } else if (placeholderRect.top > 20 && isSticky) {
           setIsSticky(false);
         }
       }
@@ -29,12 +29,12 @@ export function StickyHeader({ selectedCategory, onSelectCategory }) {
   return (
     <>
       {/* Placeholder para mantener el flujo visual */}
-      <div ref={placeholderRef} style={{ height: isSticky ? '56px' : '0' }} />
+      <div ref={placeholderRef} style={{ height: isSticky ? '65px' : '0' }} />
       {/* Header sticky con clases dinámicas */}
       <div
         ref={headerRef}
         className={`bg-white z-20 transition-all duration-300 ${
-          isSticky ? 'fixed top-0 left-0 right-0 shadow-md rounded-2xl' : 'rounded-2xl'
+          isSticky ? 'fixed pt-3 top-12 left-0 right-0 shadow-md rounded-2xl' : 'rounded-2xl'
         }`}
       >
         <div className="container mx-auto px-4">

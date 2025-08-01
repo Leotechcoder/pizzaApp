@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import { MenuItem } from './MenuItem';
 import { useBackButton } from '../hooks/useBackButton';
 
-function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick, favorites, onToggleFavorite }) {
+function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = (e) => {
@@ -11,10 +11,10 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
     onSearch(searchTerm);
   };
 
-  // const handleClear = () => {
-  //   setSearchTerm('');
-  //   onSearch('');
-  // };
+  const handleClear = () => {
+    setSearchTerm('');
+    onSearch('');
+  };
 
   const handleClose = () => {
     setSearchTerm('');
@@ -34,28 +34,34 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
             <X className="h-6 w-6" />
           </button>
         </div>
+
         <form onSubmit={handleSearch} className="mb-6">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Buscar productos..."
-              className="w-full rounded border p-2"
-            />
+          <div className="relative w-full flex gap-2">
+            <div className="relative w-full">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Buscar productos..."
+                className="w-full rounded border p-2 pr-10"
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={handleClear}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+
             <button
               type="submit"
-              className="rounded bg-orange-500 px-4 py-2 text-white hover:bg-orange-600"
+              className="shrink-0 rounded bg-orange-500 px-4 py-2 text-white hover:bg-orange-600"
             >
               Buscar
             </button>
-            {/* <button
-              type="button"
-              onClick={handleClear}
-              className="rounded bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
-            >
-              Todos
-            </button> */}
           </div>
         </form>
 
@@ -65,23 +71,19 @@ function SearchModal({ isOpen, onClose, onSearch, searchResults, onProductClick,
               <MenuItem
                 key={product.id}
                 {...product}
-                isFavorite={favorites.some(fav => fav.id === product.id)}
                 onAdd={() => {
                   onProductClick(product);
                   handleClose();
                 }}
-                onToggleFavorite={() => onToggleFavorite(product.id)}
               />
             ))}
           </div>
         ) : (
           <p className="text-center text-gray-500">No se encontraron productos.</p>
         )}
-        
       </div>
     </div>
   );
 }
 
 export default SearchModal;
-

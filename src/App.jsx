@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
 import { PromoBanner } from "./components/PromoBanner";
 import PaymentCard from "./components/PaymentCard";
 import { MenuItem } from "./components/MenuItem";
-import { FloatingCartButton } from "./components/FloatingCartButton";
 import { Footer } from "./components/Footer";
 import { BestSellers } from "./components/BestSellers";
 import { StickyHeader } from "./components/StickyHeader";
 import FavoritesModal from "./components/FavoritesModal";
 import SearchModal from "./components/SearchModal";
-import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import FloatingButtons from "./components/FloatingActions";
 
 /*Base de datos provisoria, mas adelante cambiar por tabla en la base de datos postgresql */
 const allMenuItems = [
@@ -93,7 +92,7 @@ const allMenuItems = [
     id: 7,
     name: "Lomo Simple",
     price: 17000,
-    image: "/lomo.jpg",
+    image: "",
     description: "Pan, lechuga, tomate, carne",
     category: "Lomo",
     ingredients: ["Pan", "Lechuga", "Tomate", "Carne"],
@@ -569,7 +568,7 @@ const allMenuItems = [
     id: 34,
     name: "Crudo Y Rúcula",
     price: 12000,
-    image: "",
+    image: "/pizzas/crudoyruculafondo.jpg",
     description: "Salsa, muzzarella, jamón crudo, rúcula, orégano, aceitunas",
     category: "Pizza",
     ingredients: [
@@ -811,6 +810,21 @@ export default function App() {
 
   const bestSellers = shuffleArray(bestRandom);
 
+  // Variable para useRef
+  const categoryRef = useRef(null);
+
+  // Efecto para hacer scroll suave al cambiar de categoría
+  useEffect(() => {
+    if (categoryRef.current) {
+      const offset = categoryRef.current.offsetTop;
+      const padding = 100; // Ajustá este valor según lo que necesites
+      window.scrollTo({
+        top: offset - padding,
+        behavior: "smooth"
+      });
+    }
+  }, [selectedCategory]);
+
 
   const addToCart = (product) => {
     setCartItems((prevItems) => [
@@ -912,7 +926,7 @@ export default function App() {
               onSelectCategory={setSelectedCategory}
             />
           </div>
-          <div className="mt-6">
+          <div ref={categoryRef} className="mt-6">
             <div className="flex justify-between items-center mb-4 ms-3">
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
             </div>
@@ -944,10 +958,19 @@ export default function App() {
         onClick={() => setIsCartOpen(true)}
       /> */}
 
+      {/* <ScrollToTopButton />
+
       <FloatingWhatsAppButton
         phoneNumber="+542984307550"
         message="Hola, estuve viendo su menu en linea y quisiera ordenar."
+      /> */}
+
+      {/* Botones flotantes */}
+      <FloatingButtons 
+        phoneNumber="+542984307550"
+        message="Hola, estuve viendo su menu en linea y quisiera ordenar."
       />
+
 
       <PaymentCard
         cartItems={cartItems}

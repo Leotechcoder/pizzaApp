@@ -810,18 +810,37 @@ export default function App() {
 
   const bestSellers = shuffleArray(bestRandom);
 
-  // Variable para useRef
+  // Variable useRef para las categorias
   const categoryRef = useRef(null);
+
+  // Variable useRef para el renderizado inicial
+  const isFirstRender = useRef(true);
+
+  // Variable useRef para marcar si se pulsó una categoría
+  const hasCategoryChangedRef = useRef(false); // NUEVO
+
+  const handleCategoryChange = (category) => {
+    hasCategoryChangedRef.current = true; // marcar que se pulsó una categoría
+    setSelectedCategory(category);
+  };
 
   // Efecto para hacer scroll suave al cambiar de categoría
   useEffect(() => {
-    if (categoryRef.current) {
+    // Si es el primer renderizado, no hacemos scroll
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+
+    if (hasCategoryChangedRef.current && categoryRef.current) {
       const offset = categoryRef.current.offsetTop;
-      const padding = 100; // Ajustá este valor según lo que necesites
+      const padding = 87; // Ajustá este valor según lo que necesites
       window.scrollTo({
         top: offset - padding,
         behavior: "smooth"
       });
+      hasCategoryChangedRef.current = false; // resetear para evitar scroll innecesario
     }
   }, [selectedCategory]);
 
@@ -923,7 +942,7 @@ export default function App() {
           <div className="sticky-header-wrapper">
             <StickyHeader
               selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
+              onSelectCategory={handleCategoryChange}
             />
           </div>
           <div ref={categoryRef} className="mt-6">

@@ -37,17 +37,17 @@ export function Sidebar({ isOpen, onClose }) {
               <X className="w-6 h-6" />
           </button>
 
-          <div className="mt-8 text-center">
+          <div className="mt-3 text-center">
             <div className="w-30 h-30">
               <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center mx-auto">
                 <img src="/Pizza-steve-logo-2.png" alt="Logo" className="w-20 h-20 object-contain mx-auto scale-105" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-orange-500 mt-2">Pizzas Steve</h1>
+            <h1 className="text-2xl font-bold text-orange-500 mt-3">Pizzas Steve</h1>
           </div>
 
-          <div className="mb-6">
-            <p className="text-gray-600 mt-6">
+          <div className="mb-3">
+            <p className="text-gray-600 mt-3">
               Deliciosas pizzas a tu puerta o podes retirar por nuestro local en
               <span className="font-semibold"> Villegas 64 (Gral. Roca)</span>
             </p>

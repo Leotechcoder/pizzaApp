@@ -32,12 +32,23 @@ export function MenuItem({
         className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative">
-          <img
+        <div className="relative w-full h-40 md:h-42 lg:h-48 bg-gray-100">
+          {/* <img
             src={image}
             alt={name}
-            className="  w-full h-33 md:h-40 lg:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+            className="  w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          /> */}
+           {image ? (
+              <img
+                src={image}
+                alt={name}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-400 italic">
+                  Sin imagen
+                </div>
+            )}
           {showBestSellerBadge && (
             <div className="absolute top-2 left-2 bg-red-700 text-white text-sm px-2 py-1 rounded">
               Más Vendido

@@ -673,7 +673,7 @@ const allMenuItems = [
     id: 39,
     name: "Napolitano",
     price: 13000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, tomate, ajo, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Ajo", "Jamón"],
@@ -685,7 +685,7 @@ const allMenuItems = [
     id: 40,
     name: "Calabresa",
     price: 14700,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, tomate, calabresa, morrón, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Calabresa", "Morrón", "Jamón"],
@@ -697,7 +697,7 @@ const allMenuItems = [
     id: 41,
     name: "Roquefort",
     price: 14000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, tomate, roquefort, morrón, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Roquefort", "Morrón", "Jamón"],
@@ -709,7 +709,7 @@ const allMenuItems = [
     id: 42,
     name: "Atún",
     price: 14000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, tomate, atún, morrón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Atún", "Morrón"],
@@ -721,7 +721,7 @@ const allMenuItems = [
     id: 43,
     name: "Jamón y Queso",
     price: 13000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Jamón"],
@@ -733,7 +733,7 @@ const allMenuItems = [
     id: 44,
     name: "Primavera",
     price: 13000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, tomate, morrón, huevo, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Tomate", "Morrón", "Huevo", "Jamón"],
@@ -745,7 +745,7 @@ const allMenuItems = [
     id: 45,
     name: "Palmitos",
     price: 13000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, palmitos, salsa golf, tomate, morrón, jamón",
     category: "Calzón",
     ingredients: [
@@ -764,7 +764,7 @@ const allMenuItems = [
     id: 46,
     name: "Ananá",
     price: 15000,
-    image: "",
+    image: "/pizzas/calzon.jpg",
     description: "Muzzarella, ananá, morrón, jamón",
     category: "Calzón",
     ingredients: ["Muzzarella", "Ananá", "Morrón", "Jamón"],
@@ -935,9 +935,9 @@ export default function App() {
         onOpenFavorites={() => setIsFavoritesModalOpen(true)}
         onOpenSearch={() => setIsSearchModalOpen(true)}
       />
-      <main className="flex-grow">
-        <div className="container mx-auto sm:px-0.5">
+      <main className="flex-grow ">
           <PromoBanner />
+        <div className="container mx-auto sm:px-0.5 md:px-4 lg:px-8 xl:px-12">
           <BestSellers items={bestSellers} onAddToCart={addToCart} />
           <div className="sticky-header-wrapper">
             <StickyHeader
@@ -949,7 +949,7 @@ export default function App() {
             <div className="flex justify-between items-center mb-4 ms-3">
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 my-5 mx-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-5 mx-3">
               {filteredMenuItems.map((item) => (
                 <MenuItem
                   key={item.id}

@@ -2,7 +2,7 @@ import React from 'react';
 
 export function PromoBanner() {
   return (
-    <div className="relative overflow-hidden rounded-3xl shadow-lg my-6 mx-2">
+    <div className="relative overflow-hidden rounded-3xl shadow-lg my-6 mx-0 md:mx-4 lg:mx-5">
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{

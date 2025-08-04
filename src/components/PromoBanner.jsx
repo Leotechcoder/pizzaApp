@@ -2,7 +2,7 @@ import React from 'react';
 
 export function PromoBanner() {
   return (
-    <div className="relative overflow-hidden rounded-3xl shadow-lg my-6 mx-0 md:mx-4 lg:mx-5">
+    <div className="relative sm:h-96 md:h-80 lg:h-72 overflow-hidden rounded-3xl shadow-lg my-6 mx-0 md:mx-4 lg:mx-5">
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{
@@ -10,9 +10,9 @@ export function PromoBanner() {
           filter: "brightness(50%)"
         }}
       ></div>
-      <div className="relative z-10 px-6 py-12 md:py-20 text-white">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">Pizza Deliciosa, Delivery Rapido!</h2>
-        <p className="text-xl md:text-2xl mb-6">Obten tu 10% de descuento con el codigo: STEVE10OFF</p>
+      <div className="relative z-10 px-6 pt-14 pb-8 md:py-20 md:ms-8 text-white">
+        <h2 className="text-4xl md:text-5xl font-bold mb-3">Pizza Deliciosa, Delivery Rapido!</h2>
+        <p className="text-xl md:text-2xl mb-5">Obten tu 10% de descuento con el codigo: STEVE10OFF</p>
         <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
           Ordena ahora
         </button>

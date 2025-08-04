@@ -30,23 +30,30 @@ export function Sidebar({ isOpen, onClose }) {
     <>
       <aside className="fixed top-0 right-0 h-full bg-white shadow-lg transition-all duration-300 ease-in-out z-40 w-64">
         <div className="flex flex-col h-full p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-bold text-orange-500">Pizzas Steve</h1>
-            <button
+          <button
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-gray-500 hover:text-gray-700 ms-auto"
             >
               <X className="w-6 h-6" />
-            </button>
+          </button>
+
+          <div className="mt-8 text-center">
+            <div className="w-30 h-30">
+              <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center mx-auto">
+                <img src="/Pizza-steve-logo-2.png" alt="Logo" className="w-20 h-20 object-contain mx-auto scale-105" />
+              </div>
+            </div>
+            <h1 className="text-2xl font-bold text-orange-500 mt-2">Pizzas Steve</h1>
           </div>
+
           <div className="mb-6">
-            <p className="text-gray-600 mt-2">
+            <p className="text-gray-600 mt-6">
               Deliciosas pizzas a tu puerta o podes retirar por nuestro local en
               <span className="font-semibold"> Villegas 64 (Gral. Roca)</span>
             </p>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-gray-200">
+          <div className="mt-4 pt-6 border-t border-gray-200">
             <h2 className="text-lg font-semibold mb-2">Contáctanos</h2>
             <ul className="space-y-2">
               <li className="flex items-center">

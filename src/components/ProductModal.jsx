@@ -56,7 +56,7 @@ function ProductDetailModal({ isOpen, onClose, product }) {
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-48 object-cover rounded-lg mb-4"
+            className="w-full h-42 md:h-60 object-cover rounded-lg mb-4"
           />
         )}
 

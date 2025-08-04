@@ -162,7 +162,7 @@ const allMenuItems = [
     id: 11,
     name: "Steve",
     price: 12500,
-    image: "",
+    image: "/pizzas/steve.jpg",
     description:
       "Salsa, muzzarella, tomate, calabresa, huevo, orégano, aceitunas",
     category: "Pizza",
@@ -374,7 +374,7 @@ const allMenuItems = [
     id: 24,
     name: "Provoleta",
     price: 12000,
-    image: "",
+    image: "/pizzas/provoleta.jpg",
     description:
       "Salsa, jamón, muzzarella, provolone, pimienta, orégano, aceitunas",
     category: "Pizza",
@@ -436,7 +436,7 @@ const allMenuItems = [
     id: 27,
     name: "Champiñones",
     price: 14000,
-    image: "",
+    image: "/pizzas/champiñones.jpg",
     description:
       "Salsa, muzzarella, salteado de champiñones, orégano, aceitunas",
     category: "Pizza",
@@ -488,7 +488,7 @@ const allMenuItems = [
     id: 30,
     name: "Atún",
     price: 13000,
-    image: "",
+    image: "/pizzas/atun.jpg",
     description: "Salsa, muzzarella, atún, morrones, orégano, aceitunas",
     category: "Pizza",
     ingredients: [

@@ -52,17 +52,17 @@ export default function ResponsiveMenuItem({
     return (
       <>
         <div
-          className="flex items-center gap-3 p-4 bg-white border-b border-gray-100 mb-3"
+          className="flex items-center py-1 px-4 bg-white border border-gray-100 rounded-xl shadow-md"
           onClick={() => setIsModalOpen(true)}
         >
-          <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 text-sm mb-1">{name}</h3>
-            <p className="text-xs text-gray-600 mb-2 leading-relaxed">{description}</p>
-            <span className="text-orange-500 font-bold text-sm">
+          <div className="flex-1 py-2 pr-1">
+            <h3 className="font-semibold font-sans text-gray-900 text-md mt-2">{name}</h3>
+            <p className="text-sm text-gray-600 leading-relaxed pr-1">{description}</p>
+            <span className="text-orange-500 font-semibold text-md">
               {currency} {formattedPrice}
             </span>
           </div>
-          <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+          <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
             {image ? (
               <img
                 src={image}
@@ -70,7 +70,7 @@ export default function ResponsiveMenuItem({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-400 italic text-xs">
+              <div className="w-20 h-20 flex items-center justify-center text-gray-400 italic text-xs">
                 Sin imagen
               </div>
             )}

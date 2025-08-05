@@ -962,7 +962,7 @@ export default function App() {
                 />
               ))}
             </div> */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-5 mx-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-5 mx-3">
               {filteredMenuItems.map((item) => (
                 <ResponsiveMenuItem key={item.id} {...item} />
               ))}

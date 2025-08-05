@@ -41,7 +41,7 @@ function ProductDetailModal({ isOpen, onClose, product }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-lg p-8 relative">
+      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-lg px-8 py-10 relative md:px-14">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
@@ -49,7 +49,7 @@ function ProductDetailModal({ isOpen, onClose, product }) {
           <X className="w-6 h-6" />
         </button>
 
-        <h2 className="text-3xl font-bold mb-2 text-center">{product.name}</h2>
+        <h2 className="text-3xl font-bold text-center p-4">{product.name}</h2>
         <p className="text-gray-700 mb-4 text-center">{product.category}</p>
 
         {product.image && (

@@ -4,7 +4,7 @@ import { MenuItem } from './MenuItem';
 export function BestSellers({ items, onAddToCart}) {
   return (
     <div className="mb-8">
-      <div className="flex justify-between items-center mb-4 mx-2">
+      <div className="flex justify-between items-center mb-4 mx-3 md:mx-1">
         <h2 className="text-2xl font-bold">Más Vendidos</h2>
       </div>
       <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide mx-2 p-2">

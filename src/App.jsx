@@ -935,9 +935,9 @@ export default function App() {
         onOpenFavorites={() => setIsFavoritesModalOpen(true)}
         onOpenSearch={() => setIsSearchModalOpen(true)}
       />
-      <main className="flex-grow ">
+      <main className="flex-grow">
           <PromoBanner />
-        <div className="container mx-auto sm:px-0.5 md:px-4 lg:px-8 xl:px-12">
+        <div className="container mx-auto sm:px-0.5 md:px-4 lg:px-8 xl:px-20">
           <BestSellers items={bestSellers} onAddToCart={addToCart} />
           <div className="sticky-header-wrapper">
             <StickyHeader

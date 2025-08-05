@@ -4,6 +4,8 @@ import { Header } from "./components/Header";
 import { PromoBanner } from "./components/PromoBanner";
 import PaymentCard from "./components/PaymentCard";
 import { MenuItem } from "./components/MenuItem";
+import NewMenuItems from "./components/NewMenuItems";
+import ResponsiveMenuItem from "./components/ResponsiveMenuItem";
 import { Footer } from "./components/Footer";
 import { BestSellers } from "./components/BestSellers";
 import { StickyHeader } from "./components/StickyHeader";
@@ -949,7 +951,7 @@ export default function App() {
             <div className="flex justify-between items-center mb-4 ms-3">
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-5 mx-3">
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-5 mx-3">
               {filteredMenuItems.map((item) => (
                 <MenuItem
                   key={item.id}
@@ -958,6 +960,11 @@ export default function App() {
                   isFavorite={favorites.some((fav) => fav.id === item.id)}
                   onToggleFavorite={toggleFavorite}
                 />
+              ))}
+            </div> */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-5 mx-3">
+              {filteredMenuItems.map((item) => (
+                <ResponsiveMenuItem key={item.id} {...item} />
               ))}
             </div>
           </div>

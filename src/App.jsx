@@ -949,7 +949,7 @@ export default function App() {
           </div>
           <div ref={categoryRef} className="mt-6">
             <div className="flex justify-between items-center mb-4 ms-3">
-              <h2 className="text-2xl font-bold">{selectedCategory}</h2>
+              <h2 className="text-2xl font-bold mx-1 md:mx-0">{selectedCategory}</h2>
             </div>
             {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-5 mx-3">
               {filteredMenuItems.map((item) => (

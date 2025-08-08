@@ -52,7 +52,7 @@ export default function ResponsiveMenuItem({
     return (
       <>
         <div
-          className="flex items-center py-1 px-4 bg-white border border-gray-100 rounded-xl shadow-md"
+          className="flex items-center py-1 px-4 bg-white border border-gray-100 rounded-xl shadow-md mx-3 md:mx-4"
           onClick={() => setIsModalOpen(true)}
         >
           <div className="flex-1 py-2 pr-1">

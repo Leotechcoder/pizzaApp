@@ -56,7 +56,7 @@ export default function ResponsiveMenuItem({
           onClick={() => setIsModalOpen(true)}
         >
           <div className="flex-1 py-2 pr-1">
-            <h3 className="font-semibold font-sans text-gray-900 text-md mt-2">{name}</h3>
+            <h3 className="font-semibold font-sans text-gray-900 text-lg mt-2">{name}</h3>
             <p className="text-sm text-gray-600 leading-relaxed pr-1">{description}</p>
             <span className="text-orange-500 font-semibold text-md">
               {currency} {formattedPrice}

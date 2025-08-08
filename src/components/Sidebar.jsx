@@ -28,7 +28,7 @@ export function Sidebar({ isOpen, onClose }) {
 
   return (
     <>
-      <aside className="fixed top-0 right-0 h-full bg-white shadow-lg transition-all duration-300 ease-in-out z-40 w-64">
+      <aside className="fixed top-0 right-0 h-full bg-white shadow-lg transition-all duration-300 ease-in-out z-50 w-64">
         <div className="flex flex-col h-full p-6">
           <button
               onClick={onClose}

@@ -29,7 +29,7 @@ export function StickyHeader({ selectedCategory, onSelectCategory }) {
   return (
     <>
       {/* Placeholder para mantener el flujo visual */}
-      <div ref={placeholderRef} style={{ height: isSticky ? '65px' : '0' }} />
+      <div ref={placeholderRef} style={{ height: isSticky ? '75px' : '0' }} />
       {/* Header sticky con clases dinámicas */}
       <div
         ref={headerRef}

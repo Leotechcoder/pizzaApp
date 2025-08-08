@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 
 function ProductDetailModal({ isOpen, onClose, product }) {
+  // Cierra modal si el usuario retrocede en el historial
+  useEffect(() => {
+    if (isOpen) {
+      // Agregar un estado al historial para detectar "atrás"
+      window.history.pushState({ modalOpen: true }, '');
+      const handlePopState = () => {
+        onClose();
+      };
+      window.addEventListener('popstate', handlePopState);
+
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
+  }, [isOpen, onClose]);
+
   if (!isOpen || !product) return null;
 
   // Cálculo de precios de pizza por tamaño
@@ -19,7 +35,7 @@ function ProductDetailModal({ isOpen, onClose, product }) {
     }
   };
 
-  // Cálculo de precios para empanadas según docena
+  // Cálculo de precios para empanadas
   const getEmpanadaPrices = (dozenPrice) => {
     const unit = dozenPrice / 12;
     return {

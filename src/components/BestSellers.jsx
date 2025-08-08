@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem } from './MenuItem';
+import { MenuItem } from './unused/MenuItem';
 
 export function BestSellers({ items, onAddToCart}) {
   return (

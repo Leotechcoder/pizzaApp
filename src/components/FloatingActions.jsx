@@ -27,7 +27,7 @@ function FloatingButtons({ phoneNumber, message }) {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 flex flex-col gap-4 z-50">
+    <div className="fixed bottom-4 right-4 flex flex-col gap-4 z-40">
       {showScrollTop && (
         <button
           onClick={scrollToTop}

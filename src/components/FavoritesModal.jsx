@@ -1,6 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import { MenuItem } from './MenuItem';
+import { MenuItem } from './unused/MenuItem';
 import { useBackButton } from '../hooks/useBackButton';
 
 function FavoritesModal({ isOpen, onClose, favorites, onRemoveFromFavorites, onProductClick, onToggleFavorite }) {

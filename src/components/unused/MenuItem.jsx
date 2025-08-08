@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Clock, Flame, Heart } from 'lucide-react';
-import  ProductModal  from './ProductModal';
+import  ProductModal  from '../ProductModal';
 
 export function MenuItem({ 
   id, 

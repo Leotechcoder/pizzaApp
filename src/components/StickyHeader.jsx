@@ -11,9 +11,9 @@ export function StickyHeader({ selectedCategory, onSelectCategory }) {
       if (headerRef.current && placeholderRef.current) {
         const placeholderRect = placeholderRef.current.getBoundingClientRect();
 
-        if (placeholderRect.top <= 65 && !isSticky) {
+        if (placeholderRect.top <= 75 && !isSticky) {
           setIsSticky(true);
-        } else if (placeholderRect.top > 65 && isSticky) {
+        } else if (placeholderRect.top > 75 && isSticky) {
           setIsSticky(false);
         }
       }

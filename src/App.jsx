@@ -141,7 +141,7 @@ const allMenuItems = [
     id: 10,
     name: "Hamburguesa Completa",
     price: 18000,
-    image: "",
+    image: "/sanguches/hamburguesa-completa.jpeg",
     description: "Pan, lechuga, tomate, carne, huevo, jamón, queso, aderezos",
     category: "Hamburguesa",
     ingredients: [
@@ -324,7 +324,7 @@ const allMenuItems = [
     id: 21,
     name: "Roquefort",
     price: 12000,
-    image: "",
+    image: "/pizzas/roquefort.jpg",
     description: "Salsa, muzzarella, roquefort, orégano, aceitunas",
     category: "Pizza",
     ingredients: ["Salsa", "Muzzarella", "Roquefort", "Orégano", "Aceitunas"],
@@ -397,7 +397,7 @@ const allMenuItems = [
     id: 25,
     name: "Palmitos",
     price: 13000,
-    image: "",
+    image: "/pizzas/palmitos.jpg",
     description:
       "Salsa, jamón, muzzarella, palmitos, huevo, salsa golf, orégano, aceitunas",
     category: "Pizza",
@@ -457,7 +457,7 @@ const allMenuItems = [
     id: 28,
     name: "Ananá",
     price: 13000,
-    image: "",
+    image: "/pizzas/anana.jpg",
     description:
       "Salsa, muzzarella, jamón, ananá, morrones, orégano, aceitunas",
     category: "Pizza",
@@ -509,7 +509,7 @@ const allMenuItems = [
     id: 31,
     name: "Luna De Miel",
     price: 13000,
-    image: "",
+    image: "/pizzas/luna-de-miel.jpg",
     description:
       "Salsa, muzzarella, roquefort, apio, nueces, orégano, aceitunas",
     category: "Pizza",
@@ -550,7 +550,7 @@ const allMenuItems = [
     id: 33,
     name: "Panceta Y Verdeo O Ajíes",
     price: 14000,
-    image: "",
+    image: "/pizzas/panceta-ajies.jpg",
     description:
       "Salsa, muzzarella, panceta ahumada, verdeo o ajíes, orégano, aceitunas",
     category: "Pizza",
@@ -589,7 +589,7 @@ const allMenuItems = [
     id: 35,
     name: "Pollo Con Salsa Golf",
     price: 14000,
-    image: "",
+    image: "/pizzas/pollo.jpg",
     description:
       "Salsa, muzzarella, salteado de pollo, salsa golf, orégano, aceitunas",
     category: "Pizza",
@@ -609,7 +609,7 @@ const allMenuItems = [
     id: 36,
     name: "Cuatro Quesos",
     price: 13000,
-    image: "",
+    image: "/pizzas/cuatro-quesos.jpg",
     description:
       "Salsa, muzzarella, provolone, roquefort, parmesano, orégano, aceitunas",
     category: "Pizza",

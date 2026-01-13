@@ -1,76 +1,91 @@
-import React, { useState, useEffect } from 'react';
-import ProductModal  from './ProductModal.jsx';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import ProductModal from "./ProductModal";
 
-// Hook para detectar pantalla
+/* -------------------------
+   Hook media query
+------------------------- */
 function useMediaQuery(query) {
-  const [matches, setMatches] = useState(false);
+  const [matches, setMatches] = React.useState(() =>
+    window.matchMedia(query).matches
+  );
 
-  useEffect(() => {
+  React.useEffect(() => {
     const media = window.matchMedia(query);
-    if (media.matches !== matches) setMatches(media.matches);
-
-    const listener = () => setMatches(media.matches);
-    media.addListener(listener);
-    return () => media.removeListener(listener);
-  }, [query, matches]);
+    const listener = (e) => setMatches(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, [query]);
 
   return matches;
 }
 
+/* -------------------------
+   COMPONENTE
+------------------------- */
 export default function ResponsiveMenuItem({
-  id,
-  name,
-  description,
-  price,
-  image,
-  category,
-  ingredients,
-  calories,
-  preparationTime,
-  volume,
+  productId,
   onAdd,
-  isFavorite,
-  onToggleFavorite,
-  showBestSellerBadge = false,
   currency = "$",
+  showBestSellerBadge = false,
 }) {
+  const product = useSelector((state) =>
+    state.products.items.find((p) => p.id === productId)
+  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  const handleAddToCart = (product) => {
-    onAdd(product);
-    setIsModalOpen(false);
-  };
+  if (!product) return null;
 
-  const formattedPrice = new Intl.NumberFormat("es-AR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price);
+  const {
+    name,
+    description,
+    price,
+    category,
+    images = [],
+    stock,
+    available,
+  } = product;
 
+  if (!available || stock === 0) return null;
+
+  const imageUrl = images[0]?.url;
+
+  const formattedPrice =
+    price != null
+      ? new Intl.NumberFormat("es-AR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(Number(price))
+      : null;
+
+  /* -------------------------
+     MOBILE
+  ------------------------- */
   if (!isDesktop) {
-    // Versión para móviles (basado en NewMenuItems)
     return (
       <>
         <div
-          className="flex items-center py-1 px-4 bg-white border border-gray-100 rounded-xl shadow-md mx-3 md:mx-4"
+          className="flex items-center py-1 px-4 bg-white border rounded-xl shadow-md mx-3"
           onClick={() => setIsModalOpen(true)}
         >
           <div className="flex-1 py-2 pr-1">
-            <h3 className="font-semibold font-sans text-gray-900 text-lg mt-2">{name}</h3>
-            <p className="text-sm text-gray-600 leading-relaxed pr-1">{description}</p>
-            <span className="text-orange-500 font-semibold text-md">
-              {currency} {formattedPrice}
-            </span>
+            <h3 className="font-semibold text-lg">{name}</h3>
+            <p className="text-sm text-gray-600">{description}</p>
+
+            {formattedPrice && (
+              <span className="text-orange-500 font-semibold">
+                {currency} {formattedPrice}
+              </span>
+            )}
           </div>
-          <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-            {image ? (
-              <img
-                src={image}
-                alt={name}
-                className="w-full h-full object-cover"
-              />
+
+          <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-100">
+            {imageUrl ? (
+              <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
             ) : (
-              <div className="w-20 h-20 flex items-center justify-center text-gray-400 italic text-xs">
+              <div className="flex items-center justify-center text-xs text-gray-400">
                 Sin imagen
               </div>
             )}
@@ -80,61 +95,51 @@ export default function ResponsiveMenuItem({
         <ProductModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          product={{
-            id,
-            name,
-            description,
-            price,
-            image,
-            category,
-            ingredients,
-            calories,
-            preparationTime,
-            volume,
-          }}
-          onAddToCart={handleAddToCart}
+          productId={productId}
+          onAddToCart={onAdd}
         />
       </>
     );
   }
 
-  // Versión para desktop (basado en MenuItem)
+  /* -------------------------
+     DESKTOP
+  ------------------------- */
   return (
     <>
       <div
-        className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg"
+        className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative w-full h-40 md:h-42 lg:h-48 bg-gray-100">
-          {image ? (
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
+        <div className="relative h-48 bg-gray-100">
+          {imageUrl ? (
+            <img src={imageUrl} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition" />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400 italic">
+            <div className="flex items-center justify-center text-gray-400">
               Sin imagen
             </div>
           )}
+
           {showBestSellerBadge && (
-            <div className="absolute top-2 left-2 bg-red-700 text-white text-sm px-2 py-1 rounded">
-              Más Vendido
-            </div>
+            <span className="absolute top-2 left-2 bg-red-700 text-white text-sm px-2 py-1 rounded">
+              Más vendido
+            </span>
           )}
         </div>
+
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="font-bold text-xl mb-1 text-gray-900 leading-tight">
-            {name}
-          </h3>
-          <p className="text-gray-500 text-sm mb-2">{category}</p>
-          <p className="text-gray-600 text-sm mb-2 flex-grow line-clamp-2">
-            {description}
-          </p>
-          <div className="flex items-center justify-between mt-3">
-            <span className="text-green-600 font-bold text-xl">
-              {price ? `${currency}${formattedPrice}` : 'Consultar'}
-            </span>
+          <h3 className="font-bold text-xl">{name}</h3>
+          <p className="text-sm text-gray-500">{category}</p>
+          <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+
+          <div className="mt-3">
+            {formattedPrice ? (
+              <span className="text-green-600 font-bold text-xl">
+                {currency} {formattedPrice}
+              </span>
+            ) : (
+              <span className="italic text-gray-500 text-sm">Consultar</span>
+            )}
           </div>
         </div>
       </div>
@@ -142,19 +147,8 @@ export default function ResponsiveMenuItem({
       <ProductModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        product={{
-          id,
-          name,
-          description,
-          price,
-          image,
-          category,
-          ingredients,
-          calories,
-          preparationTime,
-          volume,
-        }}
-        onAddToCart={handleAddToCart}
+        productId={productId}
+        onAddToCart={onAdd}
       />
     </>
   );

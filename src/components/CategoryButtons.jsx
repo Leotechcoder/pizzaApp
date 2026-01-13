@@ -1,6 +1,6 @@
 import React from 'react';
 
-const categories = ['Pizza', 'Pizza Rellena', 'Empanada', 'Lomo', 'Hamburguesa', 'Calzón'];
+const categories = ["Pizzas", "Hamburguesas", "Empanadas", "Lomos", "Bebidas"];
 
 export function CategoryButtons({ selectedCategory, onSelectCategory }) {
   return (

@@ -67,7 +67,7 @@ export default function ResponsiveMenuItem({
     return (
       <>
         <div
-          className="flex items-center py-1 px-4 bg-white border rounded-xl shadow-md mx-3"
+          className="h-[120px] flex items-center py-1 px-4 bg-white border rounded-xl shadow-md mx-3"
           onClick={() => setIsModalOpen(true)}
         >
           <div className="flex-1 py-2 pr-1">
@@ -108,7 +108,7 @@ export default function ResponsiveMenuItem({
   return (
     <>
       <div
-        className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition"
+        className="h-[350px] group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition"
         onClick={() => setIsModalOpen(true)}
       >
         <div className="relative h-48 bg-gray-100">

@@ -1,45 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { CategoryButtons } from './CategoryButtons';
+import React, { useState, useEffect, useRef } from "react";
+import { CategoryButtons } from "./CategoryButtons";
 
-export function StickyHeader({ selectedCategory, onSelectCategory }) {
+export function StickyHeader({ selectedCategory, onSelectCategory, onHeightChange }) {
   const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef(null);
   const placeholderRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (headerRef.current && placeholderRef.current) {
-        const placeholderRect = placeholderRef.current.getBoundingClientRect();
+      if (!placeholderRef.current) return;
 
-        if (placeholderRect.top <= 75 && !isSticky) {
-          setIsSticky(true);
-        } else if (placeholderRect.top > 75 && isSticky) {
-          setIsSticky(false);
-        }
-      }
+      const { top } = placeholderRef.current.getBoundingClientRect();
+      setIsSticky(top <= 75);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isSticky]);
+  useEffect(() => {
+    if (headerRef.current && onHeightChange) {
+      onHeightChange(headerRef.current.offsetHeight);
+    }
+  }, [isSticky, onHeightChange]);
 
   return (
     <>
-      {/* Placeholder para mantener el flujo visual */}
-      <div ref={placeholderRef} style={{ height: isSticky ? '65px' : '0' }} />
-      {/* Header sticky con clases dinámicas */}
+      <div
+        ref={placeholderRef}
+        style={{ height: isSticky ? headerRef.current?.offsetHeight : 0 }}
+      />
+
       <div
         ref={headerRef}
         className={`bg-white z-20 transition-all duration-300 ${
-          isSticky ? 'fixed pt-3 top-12 left-0 right-0 shadow-md rounded-2xl' : 'rounded-2xl'
+          isSticky
+            ? "fixed top-12 left-0 right-0 shadow-md rounded-2xl"
+            : "rounded-2xl"
         }`}
       >
         <div className="container mx-auto px-4">
-          <CategoryButtons 
-            selectedCategory={selectedCategory} 
+          <CategoryButtons
+            selectedCategory={selectedCategory}
             onSelectCategory={onSelectCategory}
           />
         </div>

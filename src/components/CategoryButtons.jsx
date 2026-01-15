@@ -4,7 +4,7 @@ const categories = ["Pizzas", "Hamburguesas", "Empanadas", "Lomos", "Bebidas"];
 
 export function CategoryButtons({ selectedCategory, onSelectCategory }) {
   return (
-    <div className="flex space-x-4 overflow-x-auto py-4 scrollbar-hide">
+    <div className="flex space-x-4 overflow-x-auto pb-2 pt-5 scrollbar-hide">
       {categories.map((category) => (
         <button
           key={category}

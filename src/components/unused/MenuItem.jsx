@@ -1,97 +1,104 @@
-import React, { useState } from 'react';
-import { Plus, Clock, Flame, Heart } from 'lucide-react';
-import  ProductModal  from '../ProductModal';
+// src/components/MenuItem.jsx
+import { useState } from "react";
+import { Plus } from "lucide-react";
+import ProductModal from "../ProductModal";
 
-export function MenuItem({ 
-  id, 
-  name, 
-  price, 
-  image, 
-  description, 
-  category, 
-  ingredients, 
-  calories, 
-  preparationTime, 
-  volume, 
-  onAdd, 
-  isFavorite, 
-  onToggleFavorite,
+export function MenuItem({
+  product,
+  onAdd,
   showBestSellerBadge = false,
-  originalPrice // Add support for original price
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleAddToCart = (product) => {
+  const {
+    id,
+    name,
+    price,
+    category,
+    description,
+    images = [],
+    available,
+  } = product;
+
+  const imageUrl = images[0]?.url ?? null;
+  const numericPrice = price ? Number(price) : null;
+
+  const handleAddToCart = () => {
     onAdd(product);
     setIsModalOpen(false);
   };
 
   return (
     <>
-      <div 
-        className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg"
+      <div
+        className="group flex flex-col bg-white rounded-3xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer"
         onClick={() => setIsModalOpen(true)}
       >
+        {/* Imagen */}
         <div className="relative w-full h-40 md:h-42 lg:h-48 bg-gray-100">
-          {/* <img
-            src={image}
-            alt={name}
-            className="  w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          /> */}
-           {image ? (
-              <img
-                src={image}
-                alt={name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400 italic">
-                  Sin imagen
-                </div>
-            )}
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400 italic">
+              Sin imagen
+            </div>
+          )}
+
           {showBestSellerBadge && (
-            <div className="absolute top-2 left-2 bg-red-700 text-white text-sm px-2 py-1 rounded">
-              Más Vendido
+            <div className="absolute top-2 left-2 bg-red-700 text-white text-xs px-2 py-1 rounded">
+              Más vendido
             </div>
           )}
         </div>
+
+        {/* Contenido */}
         <div className="p-4 flex flex-col flex-grow">
-          {/* Título principal del producto */}
-          <h3 className="font-bold text-xl mb-1 text-gray-900 leading-tight">
+          <h3 className="font-bold text-lg mb-1 text-gray-900 leading-tight">
             {name}
           </h3>
 
-          {/* Categoría del producto, debajo del nombre y más sutil */}
           <p className="text-gray-500 text-sm mb-2">
-            {category === 'Pizza Rellena' ? 'Pizza Rellena' : category}
-            {/* La lógica para pluralizar/singularizar categorías se maneja mejor en el componente padre (MenuPage)
-                o en una función auxiliar si es necesario para los títulos de sección.
-                Aquí, simplemente mostramos la categoría tal cual, que ya es comprensible. */}
+            {category}
           </p>
 
-          {/* Descripción del producto, con límite de 2 líneas para mantener la uniformidad en las tarjetas */}
           <p className="text-gray-600 text-sm mb-2 flex-grow line-clamp-2">
             {description}
           </p>
 
-          {/* Contenedor para el precio, alineado a la izquierda */}
           <div className="flex items-center justify-between mt-3">
             <span className="text-green-600 font-bold text-xl">
-              {/* Formatea el precio para que sea legible, o muestra 'Consultar' si no hay precio */}
-              {price ? `$${price.toLocaleString('es-AR')}` : 'Consultar'}
+              {numericPrice
+                ? `$${numericPrice.toLocaleString("es-AR")}`
+                : "Consultar"}
             </span>
-            {/* El botón "Ver Detalles" (o similar) se manejaría en el componente padre de la tarjeta (MenuPage),
-                ya que es el que abre el modal. */}
+
+            {available && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAddToCart();
+                }}
+                className="flex items-center gap-1 bg-green-600 text-white text-sm px-3 py-1 rounded-full hover:bg-green-700 transition"
+              >
+                <Plus size={16} />
+                Agregar
+              </button>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Modal */}
       <ProductModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        product={{ id, name, price, image, description, category, ingredients, calories, preparationTime, volume }}
+        product={product}
         onAddToCart={handleAddToCart}
       />
     </>
   );
 }
-

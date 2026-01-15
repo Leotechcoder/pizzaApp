@@ -1,7 +1,7 @@
 
 export async function fetchProducts() {
   const res = await fetch(
-    `${import.meta.env.VITE_ROUTE_API}/products`,
+    `${import.meta.env.VITE_ROUTE_STORE}/products`,
     {
       method: "GET",
       credentials: "include",

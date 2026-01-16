@@ -122,7 +122,7 @@ export default function App() {
   const addToCart = (product) => {
     setCartItems((prev) => [
       ...prev,
-      { ...product, cartId: Date.now(), quantity: 1 },
+      { ...product, cartId: Date.now()},
     ]);
     setIsCartOpen(true);
   };
@@ -184,10 +184,28 @@ export default function App() {
   /* =======================
      FILTER
   ======================= */
+  // Para MenuItems y ResponsiveMenuItem
   const filteredMenuItems = menuItems.filter(
     (item) =>
       item.category?.toLowerCase() === selectedCategory.toLowerCase()
   );
+
+  const visibleProducts = filteredMenuItems.filter(
+  (p) => p.available && p.stock > 0
+  );
+
+  // Para categorías en StickyHeader
+  const ALL_CATEGORIES = ["Pizzas", "Hamburguesas", "Empanadas", "Lomos", "Bebidas"];
+
+  const availableCategories = ALL_CATEGORIES.filter((category) =>
+    menuItems.some(
+      (item) =>
+        item.category?.toLowerCase() === category.toLowerCase() &&
+        item.available &&
+        item.stock > 0
+    )
+  );
+
 
   /* =======================
      RENDER
@@ -208,6 +226,7 @@ export default function App() {
       <BestSellers items={bestSellers} onAddToCart={addToCart} />
 
       <StickyHeader
+        categories={availableCategories}
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategoryChange}
         onHeightChange={(height) => {
@@ -219,12 +238,12 @@ export default function App() {
         ref={categoryRef}
         className="min-h-[500px] lg:px-4 bg-background grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 my-6"
       >
-        {filteredMenuItems.map((item) => (
+        {visibleProducts.map((item) => (
           <ResponsiveMenuItem
             key={item.id}
             productId={item.id}
-            showBestSellerBadge={item.bestseller}
-            onAdd={() => addToCart(item)}
+            showBestSellerBadge={item.bestSeller}
+            onAdd={addToCart}
             onToggleFavorite={() => toggleFavorite(item.id)}
           />
         ))}

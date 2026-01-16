@@ -3,25 +3,6 @@ import { X, Edit2, Trash2 } from "lucide-react";
 import { useBackButton } from "../hooks/useBackButton";
 
 /* =============================
-   OPCIONES (se mantienen)
-============================= */
-const pizzaSizes = ["Personal", "Mediana", "Familiar"];
-const extraToppings = [
-  "Queso extra",
-  "Champiñones",
-  "Aceitunas",
-  "Cebolla",
-  "Pimiento",
-];
-const hamburgerExtras = [
-  "Bacon",
-  "Huevo frito",
-  "Queso extra",
-  "Cebolla caramelizada",
-];
-const lomitoExtras = ["Huevo frito", "Queso extra", "Jamón", "Panceta"];
-
-/* =============================
    COMPONENTE
 ============================= */
 function PaymentCard({
@@ -39,32 +20,20 @@ function PaymentCard({
   if (!isOpen) return null;
 
   /* =============================
-     HELPERS
+     HANDLERS
   ============================= */
-  const getExtraOptions = (category) => {
-    switch (category) {
-      case "Pizza":
-      case "Pizzas":
-        return extraToppings;
-      case "Burger":
-      case "Hamburguesas":
-        return hamburgerExtras;
-      case "Lomito":
-      case "Lomos":
-        return lomitoExtras;
-      default:
-        return [];
-    }
-  };
-
   const handleEditItem = (item) => {
     setEditingItem(item);
     onEditItem?.(item);
   };
 
+  /* =============================
+     RENDER HELPERS
+  ============================= */
   const renderItemDetails = (item) => {
-    const quantity = item.quantity ?? 1;
+    const quantity = Number(item.quantity) || 1;
     const price = Number(item.price) || 0;
+    const subtotal = price * quantity;
 
     return (
       <div className="flex-grow">
@@ -74,29 +43,42 @@ function PaymentCard({
           <p className="text-sm text-gray-600">{item.description}</p>
         )}
 
+        {/* Tamaño */}
         {item.size && (
           <p className="text-sm">
             Tamaño: <span className="font-medium">{item.size}</span>
           </p>
         )}
 
-        {item.extras && item.extras.length > 0 && (
+        {/* Tipo de pizza */}
+        {item.pizzaType && (
           <p className="text-sm">
-            Extras: <span className="font-medium">{item.extras.join(", ")}</span>
+            Tipo: <span className="font-medium">{item.pizzaType}</span>
           </p>
         )}
 
-        {item.additionalComments && (
+        {/* Extras (future-proof) */}
+        {Array.isArray(item.extras) && item.extras.length > 0 && (
           <p className="text-sm">
+            Extras:{" "}
+            <span className="font-medium">{item.extras.join(", ")}</span>
+          </p>
+        )}
+
+        {/* Comentarios */}
+        {item.additionalComments && (
+          <p className="text-sm italic text-gray-700">
             Comentarios:{" "}
             <span className="font-medium">{item.additionalComments}</span>
           </p>
         )}
 
+        {/* Cantidad */}
         <p className="text-sm">Cantidad: {quantity}</p>
 
+        {/* Subtotal */}
         <p className="text-sm font-semibold">
-          Precio: ${(price * quantity).toFixed(2)}
+          Subtotal: ${subtotal.toFixed(2)}
         </p>
       </div>
     );
@@ -145,6 +127,7 @@ function PaymentCard({
                     <button
                       onClick={() => handleEditItem(item)}
                       className="rounded bg-blue-600 p-2 text-white hover:bg-blue-700"
+                      title="Editar"
                     >
                       <Edit2 className="h-4 w-4" />
                     </button>
@@ -152,6 +135,7 @@ function PaymentCard({
                     <button
                       onClick={() => onRemove(item.cartId ?? item.id)}
                       className="rounded bg-red-500 p-2 text-white hover:bg-red-600"
+                      title="Eliminar"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

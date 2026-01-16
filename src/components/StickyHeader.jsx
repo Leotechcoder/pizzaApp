@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CategoryButtons } from "./CategoryButtons";
 
-export function StickyHeader({ selectedCategory, onSelectCategory, onHeightChange }) {
+export function StickyHeader({ categories, selectedCategory, onSelectCategory, onHeightChange }) {
   const [isSticky, setIsSticky] = useState(false);
   const headerRef = useRef(null);
   const placeholderRef = useRef(null);
@@ -39,8 +39,9 @@ export function StickyHeader({ selectedCategory, onSelectCategory, onHeightChang
             : "rounded-2xl"
         }`}
       >
-        <div className="container mx-auto px-4">
+        <div className="container px-4">
           <CategoryButtons
+            categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={onSelectCategory}
           />

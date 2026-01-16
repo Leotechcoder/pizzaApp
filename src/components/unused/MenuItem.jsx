@@ -1,4 +1,3 @@
-// src/components/MenuItem.jsx
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import ProductModal from "../ProductModal";
@@ -10,6 +9,8 @@ export function MenuItem({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  if (!product) return null;
+
   const {
     id,
     name,
@@ -18,16 +19,24 @@ export function MenuItem({
     description,
     images = [],
     available,
+    stock,
+    bestSeller,
   } = product;
 
+
   const imageUrl = images[0]?.url ?? null;
-  const numericPrice = price ? Number(price) : null;
 
-  const handleAddToCart = () => {
-    onAdd(product);
-    setIsModalOpen(false);
-  };
+  const formattedPrice =
+    price != null
+      ? new Intl.NumberFormat("es-AR", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }).format(Number(price))
+      : null;
 
+  /* =============================
+     RENDER
+  ============================= */
   return (
     <>
       <div
@@ -48,11 +57,10 @@ export function MenuItem({
             </div>
           )}
 
-          {showBestSellerBadge && (
-            <div className="absolute top-2 left-2 bg-red-700 text-white text-xs px-2 py-1 rounded">
-              Más vendido
-            </div>
-          )}
+          {/* Badge */}
+          <div className="absolute top-2 left-2 bg-red-700 text-white text-xs px-2 py-1 rounded">
+            Más vendido
+          </div>
         </div>
 
         {/* Contenido */}
@@ -61,33 +69,27 @@ export function MenuItem({
             {name}
           </h3>
 
-          <p className="text-gray-500 text-sm mb-2">
-            {category}
-          </p>
+          <p className="text-gray-500 text-sm mb-2">{category}</p>
 
           <p className="text-gray-600 text-sm mb-2 flex-grow line-clamp-2">
             {description}
           </p>
 
           <div className="flex items-center justify-between mt-3">
-            <span className="text-green-600 font-bold text-xl">
-              {numericPrice
-                ? `$${numericPrice.toLocaleString("es-AR")}`
-                : "Consultar"}
-            </span>
-
-            {available && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleAddToCart();
-                }}
-                className="flex items-center gap-1 bg-green-600 text-white text-sm px-3 py-1 rounded-full hover:bg-green-700 transition"
-              >
-                <Plus size={16} />
-                Agregar
-              </button>
+            {formattedPrice ? (
+              <span className="text-green-600 font-bold text-xl">
+                ${formattedPrice}
+              </span>
+            ) : (
+              <span className="italic text-gray-500 text-sm">
+                Consultar
+              </span>
             )}
+
+            <div className="flex items-center gap-1 bg-green-600 text-white text-sm px-3 py-1 rounded-full">
+              <Plus size={16} />
+              Agregar
+            </div>
           </div>
         </div>
       </div>
@@ -96,8 +98,8 @@ export function MenuItem({
       <ProductModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        product={product}
-        onAddToCart={handleAddToCart}
+        productId={id}
+        onAddToCart={onAdd}
       />
     </>
   );

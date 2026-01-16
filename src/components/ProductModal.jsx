@@ -13,14 +13,20 @@ export default function ProductModal({
   onAddToCart,
 }) {
   /* =============================
-     HOOKS (ORDEN FIJO)
+     STORE
   ============================= */
   const product = useSelector(
     (state) =>
       state?.products?.items?.find((p) => p.id === productId) || null
   );
 
+  /* =============================
+     STATE
+  ============================= */
   const [quantity, setQuantity] = useState(1);
+  const [quantityInput, setQuantityInput] = useState("1");
+  const [quantityError, setQuantityError] = useState("");
+
   const [size, setSize] = useState("Personal");
   const [pizzaType, setPizzaType] = useState("Completa");
   const [comments, setComments] = useState("");
@@ -34,8 +40,7 @@ export default function ProductModal({
   const price = Number(product?.price) || 0;
   const isPizza = product?.category === "Pizzas";
 
-  const imageUrl =
-    product?.images?.[0]?.url || "/placeholder.png";
+  const imageUrl = product?.images?.[0]?.url || "/placeholder.png";
 
   const showPizzaType =
     isPizza && (size === "Mediana" || size === "Familiar");
@@ -43,7 +48,9 @@ export default function ProductModal({
   const isHalfPizza = showPizzaType && pizzaType === "Mitad";
 
   const canAddToCart =
-    stock > 0 && (isHalfPizza ? stock >= 1 : quantity <= stock);
+    stock > 0 &&
+    !quantityError &&
+    (isHalfPizza ? stock >= 1 : quantity <= stock);
 
   /* =============================
      EFFECTS
@@ -52,17 +59,46 @@ export default function ProductModal({
     if (!product) return;
 
     setQuantity(1);
+    setQuantityInput("1");
+    setQuantityError("");
     setSize("Personal");
     setPizzaType("Completa");
     setComments("");
   }, [productId]);
 
-  // Si elige mitad, forzamos cantidad = 1
+  // Forzar mitad → cantidad 1
   useEffect(() => {
     if (isHalfPizza) {
       setQuantity(1);
+      setQuantityInput("1");
+      setQuantityError("");
     }
   }, [isHalfPizza]);
+
+  /* =============================
+     VALIDATION
+  ============================= */
+  const validateQuantity = (value) => {
+    const num = Number(value);
+
+    if (!value) {
+      setQuantityError("La cantidad es obligatoria");
+      return;
+    }
+
+    if (Number.isNaN(num) || num < 1) {
+      setQuantityError("Cantidad inválida");
+      return;
+    }
+
+    if (num > stock) {
+      setQuantityError(`Stock máximo disponible: ${stock}`);
+      return;
+    }
+
+    setQuantity(num);
+    setQuantityError("");
+  };
 
   /* =============================
      GUARDS
@@ -77,7 +113,12 @@ export default function ProductModal({
     if (!canAddToCart) return;
 
     onAddToCart({
-      ...product,
+      name: product.name,
+      id: product.id,
+      price: price,
+      category: product.category,
+      description: product.description,
+      images: product.images,
       quantity: isHalfPizza ? 1 : quantity,
       size: isPizza ? size : undefined,
       pizzaType: showPizzaType ? pizzaType : undefined,
@@ -96,27 +137,22 @@ export default function ProductModal({
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+          className="absolute right-4 top-2 flex items-center gap-1 rounded-full bg-zinc-700 p-2 text-gray-200 hover:text-gray-100"
         >
-          <X className="h-6 w-6" />
+          Cerrar <X className="h-5 w-5" />
         </button>
 
         {/* Image */}
         <img
           src={imageUrl}
           alt={product.name}
-          className="mb-4 h-48 w-full rounded-lg object-cover"
+          className="my-4 h-48 w-full rounded-lg object-cover"
         />
 
-        {/* Content */}
-        <h2 className="mb-2 text-2xl font-bold">
-          {product.name}
-        </h2>
+        <h2 className="mb-2 text-2xl font-bold">{product.name}</h2>
 
         {product.description && (
-          <p className="mb-4 text-gray-600">
-            {product.description}
-          </p>
+          <p className="mb-4 text-gray-600">{product.description}</p>
         )}
 
         <div className="mb-4 flex justify-between text-sm text-gray-600">
@@ -148,7 +184,7 @@ export default function ProductModal({
           </div>
         )}
 
-        {/* Tipo de pizza */}
+        {/* Tipo */}
         {showPizzaType && (
           <div className="mb-4">
             <h3 className="mb-2 font-semibold">Tipo</h3>
@@ -170,22 +206,28 @@ export default function ProductModal({
           </div>
         )}
 
-        {/* Cantidad (NO visible si es mitad) */}
+        {/* Cantidad */}
         {!isHalfPizza && (
           <div className="mb-4">
             <h3 className="mb-2 font-semibold">Cantidad</h3>
             <input
               type="number"
               min="1"
-              max={stock}
-              value={quantity}
-              onChange={(e) =>
-                setQuantity(
-                  Math.min(stock, Math.max(1, Number(e.target.value)))
-                )
-              }
-              className="w-full rounded border p-2"
+              value={quantityInput}
+              onChange={(e) => {
+                setQuantityInput(e.target.value);
+                setQuantityError("");
+              }}
+              onBlur={(e) => validateQuantity(e.target.value)}
+              className={`w-full rounded border p-2 ${
+                quantityError ? "border-red-500" : ""
+              }`}
             />
+            {quantityError && (
+              <p className="mt-1 text-sm text-red-500">
+                {quantityError}
+              </p>
+            )}
           </div>
         )}
 

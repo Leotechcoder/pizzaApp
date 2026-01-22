@@ -5,7 +5,7 @@ import CheckoutForm from "./components/CheckoutForm"
 
 const router = createBrowserRouter([
     {
-    path: "/inicio",
+    path: "/",
         element: <Home />,
         errorElement: <Error />,
     },

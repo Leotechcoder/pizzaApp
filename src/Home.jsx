@@ -26,6 +26,7 @@ import SearchModal from "./components/SearchModal";
 import FloatingButtons from "./components/FloatingActions";
 import CheckoutForm from "./components/CheckoutForm";
 import { clearCurrentOrder } from "./orders/application/orderSlice";
+import { StoreLoader } from "./StoreLoader";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -238,7 +239,7 @@ export default function Home() {
   /* =======================
      RENDER
   ======================= */
-  if (loading) return <div>Cargando menú…</div>;
+  if (loading) return <StoreLoader />
   if (error) return <div>Error: {error}</div>;
 
   return (

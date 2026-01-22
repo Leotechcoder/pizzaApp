@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { X, Edit2, Trash2 } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 import { useBackButton } from "../hooks/useBackButton";
 
-/* =============================
-   COMPONENTE
-============================= */
-function PaymentCard({
-  cartItems = [],
-  onRemove,
-  total = 0,
-  isOpen,
-  onClose,
-  onEditItem,
-}) {
+function PaymentCard({ isOpen, onClose, onRemove, onEditItem, onCloseCheckout}) {
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total);
+
   const [editingItem, setEditingItem] = useState(null);
 
   useBackButton(isOpen, onClose);
@@ -26,6 +22,12 @@ function PaymentCard({
     setEditingItem(item);
     onEditItem?.(item);
   };
+
+  const handlePayment = () => {
+    onClose();
+    onCloseCheckout();
+  }
+
 
   /* =============================
      RENDER HELPERS
@@ -43,21 +45,18 @@ function PaymentCard({
           <p className="text-sm text-gray-600">{item.description}</p>
         )}
 
-        {/* Tamaño */}
         {item.size && (
           <p className="text-sm">
             Tamaño: <span className="font-medium">{item.size}</span>
           </p>
         )}
 
-        {/* Tipo de pizza */}
         {item.pizzaType && (
           <p className="text-sm">
             Tipo: <span className="font-medium">{item.pizzaType}</span>
           </p>
         )}
 
-        {/* Extras (future-proof) */}
         {Array.isArray(item.extras) && item.extras.length > 0 && (
           <p className="text-sm">
             Extras:{" "}
@@ -65,7 +64,6 @@ function PaymentCard({
           </p>
         )}
 
-        {/* Comentarios */}
         {item.additionalComments && (
           <p className="text-sm italic text-gray-700">
             Comentarios:{" "}
@@ -73,10 +71,8 @@ function PaymentCard({
           </p>
         )}
 
-        {/* Cantidad */}
         <p className="text-sm">Cantidad: {quantity}</p>
 
-        {/* Subtotal */}
         <p className="text-sm font-semibold">
           Subtotal: ${subtotal.toFixed(2)}
         </p>
@@ -90,7 +86,6 @@ function PaymentCard({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
       <div className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl bg-white p-6 shadow-xl">
-        {/* Cerrar */}
         <button
           onClick={onClose}
           className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
@@ -150,7 +145,10 @@ function PaymentCard({
               </p>
             </div>
 
-            <button className="mt-4 w-full rounded-lg bg-orange-500 py-2 text-white hover:bg-orange-600">
+            <button
+              onClick={handlePayment}
+              className="mt-4 w-full rounded-lg bg-orange-500 py-2 text-white hover:bg-orange-600"
+            >
               Proceder al pago
             </button>
           </>

@@ -1,8 +1,13 @@
 
-import { Heart, Search, Menu } from 'lucide-react';
+import { Heart, Search, Menu, ShoppingCart, CarTaxiFront, } from 'lucide-react';
 import { Logo } from './Logo';
+import { useSelector } from 'react-redux';
 
-export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSearch }) {
+export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSearch, onOpenCart }) {
+
+  const items = useSelector(store => store.cart.items)
+
+
   return (
     <header className="fixed top-0 left-0 w-full z-30 flex items-center justify-between px-4 py-2 bg-white shadow-sm">
       <Logo />
@@ -15,6 +20,10 @@ export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSe
         />
       </div> */}
       <div className="flex items-center gap-4">
+          <button className='cursor-pointer' onClick={onOpenCart}>
+              <ShoppingCart className='w-5 h-5 text-gray-600'/> 
+              <span className='absolute top-2 px-1 w-4 h-4 rounded-full text-center text-xs bg-orange-500'>{items.length}</span>
+          </button>
         <div className="">
           <Search className="w-5 h-5 text-gray-500 cursor-pointer" onClick={onOpenSearch} />
         </div>
@@ -29,6 +38,7 @@ export function Header({ onOpenSidebar, userAvatarUrl, onOpenFavorites, onOpenSe
           </Avatar> */}
           <Menu className="h-6 w-6" />
         </button>
+
       </div>
     </header>
   );

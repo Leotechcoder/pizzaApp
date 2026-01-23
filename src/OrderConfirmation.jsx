@@ -11,7 +11,7 @@ export default function OrderConfirmation({ order, onClose }) {
 Orden: ${order.id}.`
     )
 
-    const phone = "5491123456789"
+    const phone = "542984307550" // Número de teléfono del negocio
 
     window.open(
       `https://wa.me/${phone}?text=${message}`,

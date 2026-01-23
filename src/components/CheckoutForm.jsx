@@ -94,7 +94,6 @@ function CheckoutForm({ isOpen, onClose }) {
 
     dispatch(createOrder(orderPayload))
     dispatch(clearCart())
-    onClose()
   }
 
   /* =========================

@@ -1,36 +1,36 @@
-import { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useSocket } from "./context/SocketContext";
+import { useEffect, useState, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useSocket } from "./context/SocketContext"
 
 import {
   getProducts,
   productUpdated,
-} from "./products/application/productSlice";
+} from "./products/application/productSlice"
 
 import {
   addItemToCart,
   removeItemFromCart,
   editCartItem,
-} from "./orders/application/cartSlice";
+} from "./orders/application/cartSlice"
 
-import { Sidebar } from "./components/Sidebar";
-import { Header } from "./components/Header";
-import { PromoBanner } from "./components/PromoBanner";
-import PaymentCard from "./components/PaymentCard";
-import ResponsiveMenuItem from "./components/ResponsiveMenuItem";
-import { Footer } from "./components/Footer";
-import { BestSellers } from "./components/BestSellers";
-import { StickyHeader } from "./components/StickyHeader";
-import FavoritesModal from "./components/FavoritesModal";
-import SearchModal from "./components/SearchModal";
-import FloatingButtons from "./components/FloatingActions";
-import CheckoutForm from "./components/CheckoutForm";
-import { clearCurrentOrder } from "./orders/application/orderSlice";
-import { StoreLoader } from "./StoreLoader";
+import { Sidebar } from "./components/Sidebar"
+import { Header } from "./components/Header"
+import { PromoBanner } from "./components/PromoBanner"
+import PaymentCard from "./components/PaymentCard"
+import ResponsiveMenuItem from "./components/ResponsiveMenuItem"
+import { Footer } from "./components/Footer"
+import { BestSellers } from "./components/BestSellers"
+import { StickyHeader } from "./components/StickyHeader"
+import FavoritesModal from "./components/FavoritesModal"
+import SearchModal from "./components/SearchModal"
+import FloatingButtons from "./components/FloatingActions"
+import CheckoutForm from "./components/CheckoutForm"
+import OrderConfirmation from "./OrderConfirmation"
+import { StoreLoader } from "./StoreLoader"
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const socket = useSocket();
+  const dispatch = useDispatch()
+  const socket = useSocket()
 
   /* =======================
      REDUX
@@ -39,151 +39,144 @@ export default function Home() {
     items: menuItems,
     loading,
     error,
-  } = useSelector((state) => state.products);
+  } = useSelector((state) => state.products)
 
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items)
+  const currentOrder = useSelector(
+    (state) => state.orders.currentOrder
+  )
 
   /* =======================
      UI STATE
   ======================= */
-  const [selectedCategory, setSelectedCategory] = useState("Pizzas");
+  const [selectedCategory, setSelectedCategory] = useState("Pizzas")
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false)
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false)
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false)
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const [favorites, setFavorites] = useState([])
+  const [searchResults, setSearchResults] = useState([])
 
-  const [favorites, setFavorites] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
+  const [showOrderLoader, setShowOrderLoader] = useState(false)
 
-  const stickyHeaderHeightRef = useRef(0);
-
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-
-  //Whatsapp
-
-  const currentOrder = useSelector((state) => state.orders.currentOrder);
+  const stickyHeaderHeightRef = useRef(0)
 
   /* =======================
      BEST SELLERS
   ======================= */
   const getBestsellers = (items) =>
-    items.filter((item) => item.bestSeller === true);
+    items.filter((item) => item.bestSeller === true)
 
   const shuffleArray = (array) => {
-    const shuffled = [...array];
+    const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [
+        shuffled[j],
+        shuffled[i],
+      ]
     }
-    return shuffled;
-  };
+    return shuffled
+  }
 
-  const bestSellers = shuffleArray(getBestsellers(menuItems));
+  const bestSellers = shuffleArray(getBestsellers(menuItems))
 
   /* =======================
      FETCH PRODUCTS
   ======================= */
   useEffect(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+    dispatch(getProducts())
+  }, [dispatch])
 
   /* =======================
      SOCKET
   ======================= */
   useEffect(() => {
-    if (!socket) return;
+    if (!socket) return
 
     const handler = (product) => {
-      console.log("📦 producto actualizado:", product);
-      dispatch(productUpdated(product));
-    };
+      dispatch(productUpdated(product))
+    }
 
-    socket.on("product:updated", handler);
-    return () => socket.off("product:updated", handler);
-  }, [socket, dispatch]);
+    socket.on("product:updated", handler)
+    return () => socket.off("product:updated", handler)
+  }, [socket, dispatch])
+
+  /* =======================
+     ORDER CONFIRMATION DELAY
+  ======================= */
+  useEffect(() => {
+    if (!currentOrder) return
+
+    setShowOrderLoader(true)
+
+    const timer = setTimeout(() => {
+      setShowOrderLoader(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [currentOrder])
 
   /* =======================
      SCROLL POR CATEGORÍA
   ======================= */
-  const categoryRef = useRef(null);
-  const isFirstRender = useRef(true);
-  const hasCategoryChangedRef = useRef(false);
+  const categoryRef = useRef(null)
+  const isFirstRender = useRef(true)
+  const hasCategoryChangedRef = useRef(false)
 
   const handleCategoryChange = (category) => {
-    hasCategoryChangedRef.current = true;
-    setSelectedCategory(category);
-  };
+    hasCategoryChangedRef.current = true
+    setSelectedCategory(category)
+  }
 
   useEffect(() => {
     if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
+      isFirstRender.current = false
+      return
     }
 
     if (hasCategoryChangedRef.current && categoryRef.current) {
-      const offset = categoryRef.current.offsetTop;
+      const offset = categoryRef.current.offsetTop
 
       window.scrollTo({
         top: offset - stickyHeaderHeightRef.current - 70,
         behavior: "smooth",
-      });
+      })
 
-      hasCategoryChangedRef.current = false;
+      hasCategoryChangedRef.current = false
     }
-  }, [selectedCategory]);
+  }, [selectedCategory])
 
   /* =======================
-      MENSAJE WHATSAPP
-    ======================= */
-
-  useEffect(() => {
-    if (!currentOrder) return;
-
-    // 1️⃣ Armar mensaje
-    const message = encodeURIComponent(
-      `Hola, realicé un pedido a nombre de ${currentOrder.userName}.
-      Orden: ${currentOrder.id}.`,
-    );
-
-    // 2️⃣ Número de WhatsApp
-    const phone = "542984307550"; // SIN +
-
-    // 3️⃣ Abrir WhatsApp
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-
-    // 4️⃣ Limpiar currentOrder
-    dispatch(clearCurrentOrder());
-  }, [currentOrder, dispatch]);
-
-  /* =======================
-     CART (REDUX)
+     CART
   ======================= */
   const addToCart = (product) => {
-    dispatch(addItemToCart(product));
-  };
+    dispatch(addItemToCart(product))
+  }
 
   const removeFromCart = (cartId) => {
-    dispatch(removeItemFromCart(cartId));
-  };
+    dispatch(removeItemFromCart(cartId))
+  }
 
   const handleEditCartItem = (editedItem) => {
-    dispatch(editCartItem(editedItem));
-  };
+    dispatch(editCartItem(editedItem))
+  }
 
   /* =======================
      FAVORITES
   ======================= */
   const toggleFavorite = (productId) => {
     setFavorites((prev) => {
-      const exists = prev.some((fav) => fav.id === productId);
+      const exists = prev.some((fav) => fav.id === productId)
       if (exists) {
-        return prev.filter((fav) => fav.id !== productId);
+        return prev.filter((fav) => fav.id !== productId)
       }
-      const product = menuItems.find((p) => p.id === productId);
-      return product ? [...prev, product] : prev;
-    });
-  };
+      const product = menuItems.find((p) => p.id === productId)
+      return product ? [...prev, product] : prev
+    })
+  }
 
   /* =======================
      SEARCH
@@ -192,32 +185,36 @@ export default function Home() {
     text
       .toLowerCase()
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
+      .replace(/[\u0300-\u036f]/g, "")
 
   const handleSearch = (searchTerm) => {
     const keywords = normalizeText(searchTerm)
       .split(" ")
-      .filter((w) => w.length > 2);
+      .filter((w) => w.length > 2)
 
     const results = menuItems.filter((item) => {
-      const name = normalizeText(item.name);
-      const desc = normalizeText(item.description);
-      return keywords.some((k) => name.includes(k) || desc.includes(k));
-    });
+      const name = normalizeText(item.name)
+      const desc = normalizeText(item.description)
+      return keywords.some(
+        (k) => name.includes(k) || desc.includes(k)
+      )
+    })
 
-    setSearchResults(results);
-  };
+    setSearchResults(results)
+  }
 
   /* =======================
      FILTER
   ======================= */
   const filteredMenuItems = menuItems.filter(
-    (item) => item.category?.toLowerCase() === selectedCategory.toLowerCase(),
-  );
+    (item) =>
+      item.category?.toLowerCase() ===
+      selectedCategory.toLowerCase()
+  )
 
   const visibleProducts = filteredMenuItems.filter(
-    (p) => p.available && p.stock > 0,
-  );
+    (p) => p.available && p.stock > 0
+  )
 
   const ALL_CATEGORIES = [
     "Pizzas",
@@ -225,22 +222,39 @@ export default function Home() {
     "Empanadas",
     "Lomos",
     "Bebidas",
-  ];
+  ]
 
   const availableCategories = ALL_CATEGORIES.filter((category) =>
     menuItems.some(
       (item) =>
-        item.category?.toLowerCase() === category.toLowerCase() &&
+        item.category?.toLowerCase() ===
+          category.toLowerCase() &&
         item.available &&
-        item.stock > 0,
-    ),
-  );
+        item.stock > 0
+    )
+  )
 
   /* =======================
      RENDER
   ======================= */
   if (loading) return <StoreLoader />
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div>Error: {error}</div>
+
+  /* =======================
+     CONFIRMACIÓN DE ORDEN
+  ======================= */
+  if (currentOrder) {
+    if (showOrderLoader) {
+      return <StoreLoader />
+    }
+
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <OrderConfirmation order={currentOrder} 
+        onClose={() => setIsCheckoutOpen(false)}/>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -260,7 +274,7 @@ export default function Home() {
         selectedCategory={selectedCategory}
         onSelectCategory={handleCategoryChange}
         onHeightChange={(height) => {
-          stickyHeaderHeightRef.current = height;
+          stickyHeaderHeightRef.current = height
         }}
       />
 
@@ -286,7 +300,10 @@ export default function Home() {
         onClose={() => setIsCheckoutOpen(false)}
       />
 
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
 
       <FloatingButtons
         phoneNumber="+542984307550"
@@ -319,5 +336,5 @@ export default function Home() {
         onToggleFavorite={toggleFavorite}
       />
     </div>
-  );
+  )
 }
